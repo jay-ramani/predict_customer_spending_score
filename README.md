@@ -3,6 +3,28 @@
 ## Business Motivation
 
 ## Dataset Used
+The dataset **`Customers.csv`** serves as the foundation for this analysis.  
+
+The data represents customer information collected by a fictional retail store through its membership program. Each row corresponds to one customer and includes demographic (age, gender, family size), socioeconomic (income, profession, work experience), and behavioral (spending score) attributes.
+
+The dataset contains **2,000 records** and **8 features**.
+
+### Dataset Schema
+
+| Column | Data Type | Modeling Role |
+|--------|-----------|---------------|
+| Customer ID | Identifier | Excluded (Primary Key) |
+| Age | Numerical | Input (X) |
+| Annual Income | Numerical | Input (X) |
+| Family Size | Numerical | Input (X) |
+| Gender | Categorical | Input (X) |
+| Profession | Categorical | Input (X) |
+| Work Experience (years) | Numerical | Input (X) |
+| **Spending Score** | Numerical | **Target (y)** |
+
+
+The Spending Score is assigned by the store based on customer purchasing behavior for this dataset.
+The objective of the trained machine learning model is to predict the Spending Score of a new customer using the available input features.
 
 ## Risks/Unknowns
 
