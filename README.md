@@ -27,6 +27,16 @@ The Spending Score is assigned by the store based on customer purchasing behavio
 The objective of the trained machine learning model is to predict the Spending Score of a new customer using the available input features.
 
 ## Risks/Unknowns
+### Data
+- Data is not robust (ie. data is fake or not true)
+- Incomplete or mislabelled data
+- Unrepresentative data where our training data does not accurately reflect real world data (ie. data may be old and monetary figures may not take inflation into account)
+- Inconsistent data (ie. different formats of the similar data)
+- Data duplication
+### Model
+- Data overfitting to training dataset 
+- Small dataset 
+- Selection bias of data
 
 ## Approach of Analysis
 The approach of analysis:
