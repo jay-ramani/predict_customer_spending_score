@@ -4,7 +4,7 @@
 
 ## Dataset Used
 
-## Potential Risks and Uncertainties
+## Risks/Unknowns
 We are working with a dataset representing an imaginative shop’s ideal customers. As such, all data is generated (how this data is generated is unknown) and may not reflect real world scenarios. Here are some potential risks and uncertainties of the dataset:
 
 * Incomplete, False, or Mislabelled Data: There are data that looks to be false or incomplete. For example, we have customers with age 0 with substantial income. This may represent missing age data that is filled in with ‘0’
