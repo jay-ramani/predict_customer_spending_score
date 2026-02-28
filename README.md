@@ -1,5 +1,13 @@
 # Predit Customer Spending Score
 
+## Value the Project Brings to the Industry
+The Retail industry is one where margins are often thin, and costs need to be tightly managed to maintain operations and continuity of growth. As the population grows, there is a constant challenge given the variety of customers that have to be addressed. There are people of all ages, diverse backgrounds, and different cultural and professional demographics that have different spending habits. In such an environment, how does a Business in the Retail industry identify which customers are the right customers to focus on with marketing campaigns? Which customers should be offered incentives and loyalty benefits? This Project will attempt to answer such questions through the use of Machine Learning models and in turn will drive value for the Retail industry as a whole by providing an approach and methodology to determine which customers are worth focusing on based on predicting their propensity to spend more. 
+
+## Business Motivation
+
+
+## Dataset Used
+The dataset **`Customers.csv`** serves as the foundation for this analysis.  
 ## Purpose & Overview
 ### Business Motivation
 
@@ -62,6 +70,38 @@ Executives like CEOs, CDOs, CTOs, CMOs and CFOs can have a high level view of cu
 #### Legal
 Legal teams dealing with customer privacy would need be involved in what and how much information we could use to model
 
+## Breakdown of Roles and Tasks
+
+## Key Findings
+TBD based on analysis that will be performed using ML techniques
+
+## Instructions
+The setup of the Github repository is as follows:
+
+-Predict_Customer_Spending_Score
+--data
+----processed
+----raw
+----sql
+--experiments
+----experiment#
+----README.MD
+--models
+----model_notebook#
+----README.MD
+--reports
+----README.MD
+--src
+----README.MD
+-README.MD
+
+To recreate the models, the following libraries have to be available
+- <list of libraries and packages>
+
+Seed: <##>
+
+Hyperparameters:
+- TBD
 ## Techniques & Technologies
 ### Approach of Analysis
 The approach of analysis:
