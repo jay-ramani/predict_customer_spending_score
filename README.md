@@ -2,11 +2,11 @@
 A project of Cohort 8 of the Machine Learning team 9 at the Data Sciences Institute, University of Toronto
 
 ## Members (in no particular order)
-[Itzel Polin](https://github.com/ItzelPolin)
-[Stan W](https://github.com/stan-2828)
-[Saqib Syed](https://github.com/saqsyed)
-[Jay Ramani](https://github.com/jay-ramani)
-[Ganga Ratnam](https://github.com/ganga-ai)
+* [Itzel Polin](https://github.com/ItzelPolin)
+* [Stan W](https://github.com/stan-2828)
+* [Saqib Syed](https://github.com/saqsyed)
+* [Jay Ramani](https://github.com/jay-ramani)
+* [Ganga Ratnam](https://github.com/ganga-ai)
 
 ## Value the Project Brings to the Industry
 The Retail industry is one where margins are often thin, and costs need to be tightly managed to maintain operations and continuity of growth. As the population grows, there is a constant challenge given the variety of customers that have to be addressed. There are people of all ages, diverse backgrounds, and different cultural and professional demographics that have different spending habits. In such an environment, how does a Business in the Retail industry identify which customers are the right customers to focus on with marketing campaigns? Which customers should be offered incentives and loyalty benefits? This Project will attempt to answer such questions through the use of Machine Learning models and in turn will drive value for the Retail industry as a whole by providing an approach and methodology to determine which customers are worth focusing on based on predicting their propensity to spend more.
@@ -113,7 +113,7 @@ TBD based on analysis that will be performed using ML techniques
 The setup of the Github repository is as follows:
 ```bash
 Predict_Customer_Spending_Score
-    data  
+    data
         processed
         raw
         sql
