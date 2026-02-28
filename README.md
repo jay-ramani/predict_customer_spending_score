@@ -8,8 +8,12 @@ A project of Cohort 8 of the Machine Learning team 9 at the Data Sciences Instit
 * [Jay Ramani](https://github.com/jay-ramani)
 * [Ganga Ratnam](https://github.com/ganga-ai)
 
-## Value the Project Brings to the Industry
-The Retail industry is one where margins are often thin, and costs need to be tightly managed to maintain operations and continuity of growth. As the population grows, there is a constant challenge given the variety of customers that have to be addressed. There are people of all ages, diverse backgrounds, and different cultural and professional demographics that have different spending habits. In such an environment, how does a Business in the Retail industry identify which customers are the right customers to focus on with marketing campaigns? Which customers should be offered incentives and loyalty benefits? This Project will attempt to answer such questions through the use of Machine Learning models and in turn will drive value for the Retail industry as a whole by providing an approach and methodology to determine which customers are worth focusing on based on predicting their propensity to spend more.
+## Industry Valiue
+Retail is a high-volume, competitive industry where margins are often thin and marketing dollars must be allocated carefully. Customer populations are diverse across age, income, household structure, and professional backgrounds, which creates real variability in spending habits. A recurring business challenge is deciding which customers to prioritize for targeted campaigns, loyalty benefits, and promotional incentives, especially when a store does not yet have rich purchase history for every customer.
+
+This project provides value to retail organizations by demonstrating how customer value estimation can be approached under realistic data constraints. In many cases, retailers only have limited onboarding attributes (for example age, income, and work experience) for new loyalty members. We test whether these early-stage attributes can predict a customer’s Spending Score with sufficient accuracy to support decision-making. If demographic attributes alone do not strongly predict Spending Score, that insight is still actionable. It suggests that behavioral signals may be required for reliable value estimation and helps inform what additional data is worth collecting.
+
+If direct prediction is not feasible, the project still delivers business value through a structured alternative: segmentation. Clustering can reveal natural customer groups based on income and spending behavior, which can be translated into practical strategies such as differentiated loyalty tiers, tailored messaging, and targeted promotions. Overall, this work provides a repeatable methodology that helps retailers focus their marketing resources on the customers most likely to drive value, while keeping the analysis grounded in model validation and responsible data use.
 
 ## Business Motivation
 Department stores operate in competitive retail environments where marketing budgets must be allocated strategically to maximize return on investment. Loyalty programs, promotions, and personalized offers can increase revenue, but distributing incentives broadly reduces efficiency and profitability. The key business challenge is identifying which customers are likely to generate higher value, especially when limited purchase history is available.
@@ -30,12 +34,7 @@ Stage 1 focuses on supervised regression modeling to test whether Spending Score
 If predictive performance is insufficient, Stage 2 shifts toward extracting business value through segmentation analysis. In this case, clustering techniques are used to identify natural customer groups based on income and spending behavior. These segments are then profiled using demographic attributes to support targeted marketing strategies.
 
 This staged approach ensures that the project remains outcome-focused. Whether through predictive modeling or segmentation, the goal is to generate actionable retail insights rather than forcing model performance.
-### Industry Value
-This project provides value to retail organizations by demonstrating how customer value estimation can be approached under realistic data constraints. Many retailers lack complete behavioral data for all customers, particularly new loyalty members. Testing predictive feasibility before operational use reflects applied machine learning practice and responsible decision-making.
 
-If demographic attributes alone do not strongly predict Spending Score, that insight itself is valuable. It suggests that behavioral data may be necessary for accurate value estimation and informs future data collection strategy. Alternatively, if segmentation reveals clear customer groups, those segments can guide differentiated marketing strategies, loyalty programs, and promotional targeting.
-
-By combining feasibility testing with flexible analytical design, this project reflects how data science is applied in real business environments.
 
 ## Adressing the Business Question
 We begin by validating and cleaning the dataset, removing logically inconsistent records such as invalid ages or impossible work experience values. Two feature scenarios are then constructed: a limited-feature model using Age, Annual Income, and Work Experience, and a broader model that may incorporate Gender, Profession, and Family Size.
