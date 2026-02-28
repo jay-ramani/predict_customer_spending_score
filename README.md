@@ -15,6 +15,14 @@ We are working with a dataset representing an imaginative shop’s ideal custome
 * There are 81 entries (representing ~4% of the dataset) where the work experience is greater than the age. 
 * A large number of entries have 1 year or less in work experience with 901 entries
 
+### Potential Violation of Canadian Personal Information Regulations
+In Canada, private-sector organizations are regulated by PIPEDA (Personal Information Protection and Electronic Documents Act) which emphasizes:
+
+* Purpose limitation
+* Meaningful consent
+* Data minimization
+
+As such, organizations should collect only the personal information necessary for clearly defined business objectives. Sensitive attributes (e.g. income, profession, family data) require strong justification under privacy best practices. Because our dataset includes such attributes, our analysis and models may run afoul of PIPEDA when we use these attributes.
 
 ## Approach of Analysis
 
