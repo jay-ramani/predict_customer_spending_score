@@ -1,7 +1,15 @@
 # Predit Customer Spending Score
+A project of Cohort 8 of the Machine Learning team 9 at the Data Sciences Institute, University of Toronto
+
+## Members (in no particular order)
+[Itzel Polin](https://github.com/ItzelPolin)
+[Stan W](https://github.com/stan-2828)
+[Saqib Syed](https://github.com/saqsyed)
+[Jay Ramani](https://github.com/jay-ramani)
+[Ganga Ratnam](https://github.com/ganga-ai)
 
 ## Value the Project Brings to the Industry
-The Retail industry is one where margins are often thin, and costs need to be tightly managed to maintain operations and continuity of growth. As the population grows, there is a constant challenge given the variety of customers that have to be addressed. There are people of all ages, diverse backgrounds, and different cultural and professional demographics that have different spending habits. In such an environment, how does a Business in the Retail industry identify which customers are the right customers to focus on with marketing campaigns? Which customers should be offered incentives and loyalty benefits? This Project will attempt to answer such questions through the use of Machine Learning models and in turn will drive value for the Retail industry as a whole by providing an approach and methodology to determine which customers are worth focusing on based on predicting their propensity to spend more. 
+The Retail industry is one where margins are often thin, and costs need to be tightly managed to maintain operations and continuity of growth. As the population grows, there is a constant challenge given the variety of customers that have to be addressed. There are people of all ages, diverse backgrounds, and different cultural and professional demographics that have different spending habits. In such an environment, how does a Business in the Retail industry identify which customers are the right customers to focus on with marketing campaigns? Which customers should be offered incentives and loyalty benefits? This Project will attempt to answer such questions through the use of Machine Learning models and in turn will drive value for the Retail industry as a whole by providing an approach and methodology to determine which customers are worth focusing on based on predicting their propensity to spend more.
 
 ## Business Motivation
 Department stores operate in competitive retail environments where marketing budgets must be allocated strategically to maximize return on investment. Loyalty programs, promotions, and personalized offers can increase revenue, but distributing incentives broadly reduces efficiency and profitability. The key business challenge is identifying which customers are likely to generate higher value, especially when limited purchase history is available.
@@ -15,7 +23,8 @@ In this project, Spending Score serves as a proxy for customer value. If it can 
 Reference: Office of the Privacy Commissioner of Canada, Overview of PIPEDA – https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/
 
 ## Dataset Used
-The dataset **`Customers.csv`** serves as the foundation for this analysis.  
+The [Shop Customer dataset from Kaggle](https://www.kaggle.com/datasets/datascientistanna/customers-dataset/data) serves as the foundation for this analysis
+
 ## Purpose & Overview
 This project evaluates whether Spending Score can be predicted using demographic and socioeconomic attributes typically available at customer onboarding. The analysis is structured in two stages.
 
@@ -37,7 +46,7 @@ We begin by validating and cleaning the dataset, removing logically inconsistent
 Supervised regression models are trained and evaluated using cross-validation to assess generalization performance. Metrics include MAE, RMSE, and R².
 
 ### Dataset Used
-The dataset **`Customers.csv`** serves as the foundation for this analysis.
+The Shop Customer dataset **`Customers.csv`** serves as the foundation for this analysis.
 
 The data represents customer information collected by a fictional retail store through its membership program. Each row corresponds to one customer and includes demographic (age, gender, family size), socioeconomic (income, profession, work experience), and behavioral (spending score) attributes.
 
@@ -104,7 +113,7 @@ TBD based on analysis that will be performed using ML techniques
 The setup of the Github repository is as follows:
 ```bash
 Predict_Customer_Spending_Score
-    data  
+    data
         processed
         raw
         sql
@@ -122,14 +131,21 @@ Predict_Customer_Spending_Score
     README.md
 ```
 
-To recreate the models, the following libraries have to be available
-- <list of libraries and packages>
+To recreate the models, we need to use the paramters below
 
 Seed: Randome_State = 42
 
 Hyperparameters:
 - TBD
+
 ## Techniques & Technologies
+### Steps taken
+* Data Cleaning: Handling missing values, removing inconsistencies, and ensuring data readiness
+* Pre-analysis, finding correlation: Understanding patterns, correlations, and data distribution
+* Regression analysis and validation: Applying linear regression models to determine key loyalty drivers. and create training and test sets, assessing model accuracy
+* Visualization: Creating plots to represent insights and model results
+* Conclusion
+
 ### Approach of Analysis
 The approach of analysis:
 1. Gain a deep understanding of the business problem that needs to be solved, and the outcome that needs to be delivered (detailed out in writing)
@@ -137,6 +153,16 @@ The approach of analysis:
 3. Determine if the data has natural clustering or groupings of customers and if there are any patterns
 4. Create a baseline regression model, and test it against a validation data set - fine tune the predictions to maximize
 5. Revisit the problem statement to confirm if it has been addressed
+
+### Technical Stack:
+* Programming Language: Python
+
+* Libraries Used:
+** Numpy: matrix operations
+** Pandas: data analysis
+** Matplotlib: creating graphs and plots
+** Seaborn: enhancing matplotlib plots
+** SKLearn: regression analysis
 
 ## Key Findings & Instructions
 
