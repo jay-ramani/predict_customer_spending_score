@@ -81,7 +81,22 @@ The objective of the trained machine learning model is to predict the Spending S
 - Small dataset
 - Selection bias of data
 
-## Goals & Objectives
+### Goals & Objectives
+#### Goals
+The goal of this project is to analyze customer characteristics to understand spending behavior and determine the most effective modeling approach for estimating customer value. Both supervised and unsupervised learning techniques are explored to assess whether customer spending is better predicted directly or better understood through segmentation. We aim to evaluate whether limited customer data is sufficient to support reliable value estimation and informed marketing decision-making.
+
+#### Objectives
+- Perform data validation and cleaning to ensure logical consistency and business realism.
+- Explore relationships between customer attributes and Spending Score.
+- Develop and compare supervised learning models to predict Spending Score.
+- Compare predictive performance between a limited-feature model and a full-feature model.
+- Evaluate model performance using appropriate regression metrics (MAE, RMSE, R²).
+- Apply clustering techniques to identify natural customer segments.
+- Interpret model results to identify key drivers of customer value.
+- Translate predictive outputs into actionable marketing recommendations (e.g., customer value tiers).
+
+In summary, this project applies both predictive modeling and customer segmentation techniques to understand spending behavior. By comparing supervised and unsupervised approaches, the study evaluates how customer data can best support informed marketing and business decisions.
+
 ### Success Metrics
 1. At a minimum, 80% accuracy in comparison to the customer spending score published in the dataset.
 2. Also, the ability to predict the score with missing fields like profession, family size etc..
