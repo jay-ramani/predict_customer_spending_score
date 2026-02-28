@@ -78,22 +78,22 @@ TBD based on analysis that will be performed using ML techniques
 ## Instructions
 The setup of the Github repository is as follows:
 
--Predict_Customer_Spending_Score
---data
-----processed
-----raw
-----sql
---experiments
-----experiment#
-----README.MD
---models
-----model_notebook#
-----README.MD
---reports
-----README.MD
---src
-----README.MD
--README.MD
+-Predict_Customer_Spending_Score  
+--data  
+----processed  
+----raw  
+----sql  
+--experiments  
+----experiment#  
+----README.MD  
+--models  
+----model_notebook#  
+----README.MD  
+--reports  
+----README.MD  
+--src  
+----README.MD  
+-README.MD  
 
 To recreate the models, the following libraries have to be available
 - <list of libraries and packages>
