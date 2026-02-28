@@ -1,18 +1,26 @@
 # Predit Customer Spending Score
+A project of Cohort 8 of the Machine Learning team 9 at the Data Sciences Institute, University of Toronto
+
+## Members (in no particular order)
+[Itzel Polin](https://github.com/ItzelPolin)
+[Stan W](https://github.com/stan-2828)
+[Saqib Syed](https://github.com/saqsyed)
+[Jay Ramani](https://github.com/jay-ramani)
+[Ganga Ratnam](https://github.com/ganga-ai)
 
 ## Value the Project Brings to the Industry
-The Retail industry is one where margins are often thin, and costs need to be tightly managed to maintain operations and continuity of growth. As the population grows, there is a constant challenge given the variety of customers that have to be addressed. There are people of all ages, diverse backgrounds, and different cultural and professional demographics that have different spending habits. In such an environment, how does a Business in the Retail industry identify which customers are the right customers to focus on with marketing campaigns? Which customers should be offered incentives and loyalty benefits? This Project will attempt to answer such questions through the use of Machine Learning models and in turn will drive value for the Retail industry as a whole by providing an approach and methodology to determine which customers are worth focusing on based on predicting their propensity to spend more. 
+The Retail industry is one where margins are often thin, and costs need to be tightly managed to maintain operations and continuity of growth. As the population grows, there is a constant challenge given the variety of customers that have to be addressed. There are people of all ages, diverse backgrounds, and different cultural and professional demographics that have different spending habits. In such an environment, how does a Business in the Retail industry identify which customers are the right customers to focus on with marketing campaigns? Which customers should be offered incentives and loyalty benefits? This Project will attempt to answer such questions through the use of Machine Learning models and in turn will drive value for the Retail industry as a whole by providing an approach and methodology to determine which customers are worth focusing on based on predicting their propensity to spend more.
 
 ## Business Motivation
 
-
 ## Dataset Used
-The dataset **`Customers.csv`** serves as the foundation for this analysis.  
+The [Shop Customer dataset from Kaggle](https://www.kaggle.com/datasets/datascientistanna/customers-dataset/data) serves as the foundation for this analysis
+
 ## Purpose & Overview
 ### Business Motivation
 
 ### Dataset Used
-The dataset **`Customers.csv`** serves as the foundation for this analysis.
+The Shop Customer dataset **`Customers.csv`** serves as the foundation for this analysis.
 
 The data represents customer information collected by a fictional retail store through its membership program. Each row corresponds to one customer and includes demographic (age, gender, family size), socioeconomic (income, profession, work experience), and behavioral (spending score) attributes.
 
@@ -95,14 +103,21 @@ The setup of the Github repository is as follows:
 ----README.MD
 -README.MD
 
-To recreate the models, the following libraries have to be available
-- <list of libraries and packages>
+To recreate the models, we need to use the paramters below
 
 Seed: <##>
 
 Hyperparameters:
 - TBD
+
 ## Techniques & Technologies
+### Steps taken
+* Data Cleaning: Handling missing values, removing inconsistencies, and ensuring data readiness
+* Pre-analysis, finding correlation: Understanding patterns, correlations, and data distribution
+* Regression analysis and validation: Applying linear regression models to determine key loyalty drivers. and create training and test sets, assessing model accuracy
+* Visualization: Creating plots to represent insights and model results
+* Conclusion
+
 ### Approach of Analysis
 The approach of analysis:
 1. Gain a deep understanding of the business problem that needs to be solved, and the outcome that needs to be delivered (detailed out in writing)
@@ -110,6 +125,16 @@ The approach of analysis:
 3. Determine if the data has natural clustering or groupings of customers and if there are any patterns
 4. Create a baseline regression model, and test it against a validation data set - fine tune the predictions to maximize
 5. Revisit the problem statement to confirm if it has been addressed
+
+### Technical Stack:
+* Programming Language: Python
+
+* Libraries Used:
+** Numpy: matrix operations
+** Pandas: data analysis
+** Matplotlib: creating graphs and plots
+** Seaborn: enhancing matplotlib plots
+** SKLearn: regression analysis
 
 ## Key Findings & Instructions
 
