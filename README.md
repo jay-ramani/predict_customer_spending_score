@@ -22,9 +22,6 @@ In this project, Spending Score serves as a proxy for customer value. If it can 
 
 Reference: Office of the Privacy Commissioner of Canada, Overview of PIPEDA – https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/
 
-## Dataset Used
-The [Shop Customer dataset from Kaggle](https://www.kaggle.com/datasets/datascientistanna/customers-dataset/data) serves as the foundation for this analysis
-
 ## Purpose & Overview
 This project evaluates whether Spending Score can be predicted using demographic and socioeconomic attributes typically available at customer onboarding. The analysis is structured in two stages.
 
@@ -46,7 +43,7 @@ We begin by validating and cleaning the dataset, removing logically inconsistent
 Supervised regression models are trained and evaluated using cross-validation to assess generalization performance. Metrics include MAE, RMSE, and R².
 
 ### Dataset Used
-The Shop Customer dataset **`Customers.csv`** serves as the foundation for this analysis.
+The [Shop Customer dataset from Kaggle](https://www.kaggle.com/datasets/datascientistanna/customers-dataset/data) serves as the foundation for this analysis.
 
 The data represents customer information collected by a fictional retail store through its membership program. Each row corresponds to one customer and includes demographic (age, gender, family size), socioeconomic (income, profession, work experience), and behavioral (spending score) attributes.
 
