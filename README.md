@@ -1,9 +1,10 @@
 # Predit Customer Spending Score
 A project of Cohort 8 of the Machine Learning team 9 at the Data Sciences Institute, University of Toronto
+Project Repo: https://github.com/jay-ramani/predict_customer_spending_score
 
 ## Members (in no particular order)
 * [Itzel Polin](https://github.com/ItzelPolin)
-* [Stan W](https://github.com/stan-2828)
+* [Stanley Wong](https://github.com/stan-2828)
 * [Saqib Syed](https://github.com/saqsyed)
 * [Jay Ramani](https://github.com/jay-ramani)
 * [Ganga Ratnam](https://github.com/ganga-ai)
@@ -36,7 +37,7 @@ If predictive performance is insufficient, Stage 2 shifts toward extracting busi
 This staged approach ensures that the project remains outcome-focused. Whether through predictive modeling or segmentation, the goal is to generate actionable retail insights rather than forcing model performance.
 
 
-## Adressing the Business Question
+## Addressing the Business Question
 We begin by validating and cleaning the dataset, removing logically inconsistent records such as invalid ages or impossible work experience values. Two feature scenarios are then constructed: a limited-feature model using Age, Annual Income, and Work Experience, and a broader model that may incorporate Gender, Profession, and Family Size.
 
 Supervised regression models are trained and evaluated using cross-validation to assess generalization performance. Metrics include MAE, RMSE, and R².
@@ -61,7 +62,7 @@ The dataset contains **2,000 records** and **8 features**.
 | Work Experience (years) | Numerical | Input (X) |
 | **Spending Score** | Numerical | **Target (y)** |
 
-## Risks/Unknowns
+## Potential Risks and Unknowns
 We are working with a dataset representing an imaginative shop’s ideal customers. As such, all data is generated (how this data is generated is unknown) and may not reflect real world scenarios. Here are some potential risks and uncertainties of the dataset:
 
 * Incomplete, False, or Mislabelled Data: There are data that looks to be false or incomplete. For example, we have customers with age 0 with substantial income. This may represent missing age data that is filled in with ‘0’
@@ -69,7 +70,7 @@ We are working with a dataset representing an imaginative shop’s ideal custome
 * There is gender imbalance with 1186 females vs 814 males. Any insights modeled with respect to gender may bias towards females
 * Artists (612 entries representing ~30%) and Healthcare (339 entries representing ~17%) professions together denote almost 50% of all professions in the dataset. This may not represent real world population and may skew our model results towards those two professions
 * The dataset does not include a temporal feature, thus the models will not be able to account for seasonality or changes in customers behaviour overtime
-* There are 81 entries (representing ~4% of the dataset) where the work experience is greater than the age. 
+* There are 81 entries (representing ~4% of the dataset) where the work experience is greater than the age 
 * A large number of entries have 1 year or less in work experience with 901 entries
 
 ### Potential Violation of Canadian Personal Information Regulations
@@ -119,7 +120,16 @@ Executives like CEOs, CDOs, CTOs, CMOs and CFOs can have a high level view of cu
 #### Legal
 Legal teams dealing with customer privacy would need be involved in what and how much information we could use to model
 
-## Breakdown of Roles and Tasks
+## Breakdown of Roles and Tasks  
+Data Analysis - Explore the data and analyze if there are any anomalies or outliers, null values, duplications etc. If there are, make decisions on treatment of each.
+
+Data Cleaning - Based on the data analysis, perform the cleaning required for the data (e.g. removal of nulls, imputation of data if required for any illogical values, etc.).
+
+Modeling - Use the data to perform regression modeling and clustering of the data; determine if the model is performing as required based on MAE, RMSE, and r^2. Test the model for predictive outcomes and validate against provided Spending Score column.
+
+Visual Plots - Add the visual plots for data exploration, models and clustering (including feature evaluation etc.).
+
+Report - Summarize the activities and findings in a final report in the README.md file.
 
 ## Key Findings
 TBD based on analysis that will be performed using ML techniques
@@ -146,9 +156,9 @@ Predict_Customer_Spending_Score
     README.md
 ```
 
-To recreate the models, we need to use the paramters below
+To recreate the models, we need to use the parameters below
 
-Seed: Randome_State = 42
+Seed: Random_State = 42
 
 Hyperparameters:
 - TBD
@@ -179,8 +189,5 @@ The approach of analysis:
 ** Seaborn: enhancing matplotlib plots
 ** SKLearn: regression analysis
 
-## Key Findings & Instructions
-
-## Breakdown of Roles and Tasks
 
 ## Visuals & Credits
