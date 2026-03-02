@@ -169,6 +169,44 @@ Hyperparameters:
 * Visualization: Creating plots to represent insights and model results
 * Conclusion
 
+### Exploratory Data Analysis
+* Visualize distribution, median, quartiles and outliers for every numeric feature
+  * Distribution of age
+    
+    <img width="571" height="455" alt="Untitled" src="https://github.com/user-attachments/assets/afa911b8-2519-4a53-ac79-82c927be04ce" />
+  * Boxplot of age
+    
+    <img width="520" height="455" alt="Untitled" src="https://github.com/user-attachments/assets/edc440ad-8232-4452-b59a-0e0c342a2d94" />
+  * Distribution of annual_income
+    
+    <img width="571" height="455" alt="Untitled-1" src="https://github.com/user-attachments/assets/5c8272b9-9e3b-4515-82aa-84e501c75c87" />
+  * Boxplot of annual_income
+    
+    <img width="520" height="455" alt="Untitled" src="https://github.com/user-attachments/assets/c67f1d11-3b92-4f85-a96e-649ab842930e" />
+  * Distribution of family_size
+    
+    <img width="571" height="455" alt="Untitled-1" src="https://github.com/user-attachments/assets/14f96439-d6bd-4ae9-8224-dee46cb1ccc0" />
+  * Boxplot of family_size
+    
+    <img width="520" height="455" alt="Untitled" src="https://github.com/user-attachments/assets/e7855b89-3a0d-466e-b7af-4b3c934cdf00" />
+  * Distribution of work_experience
+    
+    <img width="577" height="455" alt="Untitled-1" src="https://github.com/user-attachments/assets/cf7f7c03-cc04-45f1-a78c-7651960b0652" />
+  * Boxplot of work_experience
+    
+    <img width="526" height="455" alt="Untitled" src="https://github.com/user-attachments/assets/5786bde8-8711-471f-8b4f-57a799459164" />
+  * Distribution of spending_score
+    
+    <img width="571" height="455" alt="Untitled-1" src="https://github.com/user-attachments/assets/35f9d95d-b50c-4eb5-acbb-51b7de617c86" />
+  * Boxplot of spending_score
+    
+    <img width="520" height="455" alt="Untitled" src="https://github.com/user-attachments/assets/b87dabb0-e837-4f09-acbb-14ff15aa7d2b" />
+  * Heatmap of features
+    
+    <img width="729" height="614" alt="Untitled-1" src="https://github.com/user-attachments/assets/c94e7ff5-042f-402a-9f00-b141e85e0d28" />
+    
+    As we can see from the above heatmap, there is no strong linear relationship between any single feature and spending score. Hence, regression is highly unlikely to be a suitable approach.
+
 ### Approach of Analysis
 The approach of analysis:
 1. Gain a deep understanding of the business problem that needs to be solved, and the outcome that needs to be delivered (detailed out in writing)
