@@ -1,6 +1,7 @@
 # Predit Customer Spending Score
-A project of Cohort 8 of the Machine Learning team 9 at the Data Sciences Institute, University of Toronto
-Project Repo: https://github.com/jay-ramani/predict_customer_spending_score
+A project of Cohort 8 of the Machine Learning team 9 at the Data Sciences Institute, University of Toronto.
+
+Project repository located at https://github.com/jay-ramani/predict_customer_spending_score.
 
 ## Members (in no particular order)
 * [Itzel Polin](https://github.com/ItzelPolin)
