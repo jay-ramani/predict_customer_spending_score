@@ -9,7 +9,7 @@ Project Repo: https://github.com/jay-ramani/predict_customer_spending_score
 * [Jay Ramani](https://github.com/jay-ramani)
 * [Ganga Ratnam](https://github.com/ganga-ai)
 
-## Industry Valiue
+## Industry Value
 Retail is a high-volume, competitive industry where margins are often thin and marketing dollars must be allocated carefully. Customer populations are diverse across age, income, household structure, and professional backgrounds, which creates real variability in spending habits. A recurring business challenge is deciding which customers to prioritize for targeted campaigns, loyalty benefits, and promotional incentives, especially when a store does not yet have rich purchase history for every customer.
 
 This project provides value to retail organizations by demonstrating how customer value estimation can be approached under realistic data constraints. In many cases, retailers only have limited onboarding attributes (for example age, income, and work experience) for new loyalty members. We test whether these early-stage attributes can predict a customer’s Spending Score with sufficient accuracy to support decision-making. If demographic attributes alone do not strongly predict Spending Score, that insight is still actionable. It suggests that behavioral signals may be required for reliable value estimation and helps inform what additional data is worth collecting.
@@ -66,11 +66,11 @@ The dataset contains **2,000 records** and **8 features**.
 We are working with a dataset representing an imaginative shop’s ideal customers. As such, all data is generated (how this data is generated is unknown) and may not reflect real world scenarios. Here are some potential risks and uncertainties of the dataset:
 
 * Incomplete, False, or Mislabelled Data: There are data that looks to be false or incomplete. For example, we have customers with age 0 with substantial income. This may represent missing age data that is filled in with ‘0’
-* There is a relative equal distribution of customers across all age groups from 0-99 which may skew the model 
+* There is a relative equal distribution of customers across all age groups from 0-99 which may skew the model
 * There is gender imbalance with 1186 females vs 814 males. Any insights modeled with respect to gender may bias towards females
 * Artists (612 entries representing ~30%) and Healthcare (339 entries representing ~17%) professions together denote almost 50% of all professions in the dataset. This may not represent real world population and may skew our model results towards those two professions
 * The dataset does not include a temporal feature, thus the models will not be able to account for seasonality or changes in customers behaviour overtime
-* There are 81 entries (representing ~4% of the dataset) where the work experience is greater than the age 
+* There are 81 entries (representing ~4% of the dataset) where the work experience is greater than the age
 * A large number of entries have 1 year or less in work experience with 901 entries
 
 ### Potential Violation of Canadian Personal Information Regulations
@@ -120,16 +120,14 @@ Executives like CEOs, CDOs, CTOs, CMOs and CFOs can have a high level view of cu
 #### Legal
 Legal teams dealing with customer privacy would need be involved in what and how much information we could use to model
 
-## Breakdown of Roles and Tasks  
-Data Analysis - Explore the data and analyze if there are any anomalies or outliers, null values, duplications etc. If there are, make decisions on treatment of each.
-
-Data Cleaning - Based on the data analysis, perform the cleaning required for the data (e.g. removal of nulls, imputation of data if required for any illogical values, etc.).
-
-Modeling - Use the data to perform regression modeling and clustering of the data; determine if the model is performing as required based on MAE, RMSE, and r^2. Test the model for predictive outcomes and validate against provided Spending Score column.
-
-Visual Plots - Add the visual plots for data exploration, models and clustering (including feature evaluation etc.).
-
-Report - Summarize the activities and findings in a final report in the README.md file.
+## Breakdown of Roles and Tasks
+| Task | Description | Member(s) |
+|------|------------|-----------|
+| Data Analysis | Explore the data and analyze if there are any anomalies or outliers, null values, duplications etc. If there are, make decisions on treatment of each | All |
+| Data Cleaning | Based on the data analysis, perform the cleaning required for the data (e.g. removal of nulls, imputation of data if required for any illogical values, etc.) | Ganga |
+| Modeling | Use the data to perform regression modeling and clustering of the data; determine if the model is performing as required based on MAE, RMSE, and r^2. Test the model for predictive outcomes and validate against provided Spending Score column. | Ganga, Jay |
+| Visual Plots | Add the visual plots for data exploration, models and clustering (including feature evaluation etc.) | Itzel, Stan, Saqib |
+| Report | Summarize the activities and findings in a final report in the README.md file | Saqib, Jay |
 
 ## Key Findings
 TBD based on analysis that will be performed using ML techniques
