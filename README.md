@@ -172,7 +172,7 @@ Hyperparameters:
   * .describe() was used to generate summary statistics
  
   Results:
-  * No missing values in the dataset
+  * The Profession column is missing 35 entries
 
 * Pre-analysis, finding correlation: Understanding patterns, correlations, and data distribution
 * Regression analysis and validation: Applying linear regression models to determine key loyalty drivers. and create training and test sets, assessing model accuracy
