@@ -131,7 +131,26 @@ Legal teams dealing with customer privacy would need be involved in what and how
 | Report | Summarize the activities and findings in a final report in the README.md file | Saqib, Jay |
 
 ## Key Findings
-TBD based on analysis that will be performed using ML techniques
+- Our Exploratory Data Analysis demonstrates there is no correlation between the features and the target variable, and there are missing values (35 for Profession) and anomalies in the data that are not logical. Our EDA determines that the Spending Score is likely not related to the remaining features, and is derived as a relative value.
+Results of EDA:
+  * We found the Profession column is missing 35 entries
+  * 14% of customers are under the age of 15, yet still have a profession such as Doctor, etc.
+  * 5% of customers have work experience that is greater than their stated age
+  * 22% of customers have work experience of 0, but still have a profession and income
+  * The gender in the data set is also skewed as 60% female and 40% male, which could affect interpretation if gender is taken as a feature
+ For details, refer to EDA notebook: experiments\notebooks\01_eda.ipynb
+
+- Multiple types of regressions yield r^2 <= 0, and high MAE and MSE, indicating that the features collected are not conducive to predicting spending score using regression techniques, and furthermore informs us that Spending Score is potentially a relative value as opposed to being a mathematical or measured value. 
+For details, refer to regression notebook: experiments\notebooks\02_regression.ipynb
+
+- As a final experiment, a feed forward neural network was set up with 2 hiddne layers and one output layer. The resulting MAE was 24, which is significant given spending score ranges between 1 - 100. This aligns with the result we got from the regression exercise as well. 
+For details, refer to neural network notebooks: experiments\notebooks\05_neuralnetwork_2.ipynb
+
+- Instead of predicting Spending Score, we switch to attempting to understand customer behavior by clustering the data. Our analysis shows optimal k-value to be used is 4, however our Silhouette score flattening at 0.38 tells us that the dataset does not have strong natural clusters. 
+- Clustering further proves that we get 4 broad clusters, but none of them help us conclude that Age or Income can be an indicator of spending propensity. Furthermore, adding Age reduces cohesiveness of the clusters, showing us that it is not a useful feature to add in for this particular dataset. 
+- Profession categories are broad and overlapping, and do not provide us a deterministic way of understanding if one profession impacts spending propensity over another, as the incomes for professions are also random (there is no trend that a profession necessarily has a higher income over another, and even if it did, we have already proven that income is not a significant indicator of spending).
+- At best, these clusters can be used to understand Personas of customers, with some better quality data collection around other features such as the income, ages and professions.
+For details, refer to clustering notebook: experiments\notebooks\03_clustering.ipynb
 
 ## Instructions
 The setup of the Github repository is as follows:
@@ -154,13 +173,27 @@ Predict_Customer_Spending_Score
     .gitignore
     README.md
 ```
+Libraries and packages used:
+pandas
+numpy
+matplotlib.pyplot
+seaborn
+sklearn.cluster (KMeans)
+sklearn.preprocessing (StandardScaler, OneHotEncoder, PolynomialFeatures)
+sklearn.compose (ColumnTransformer)
+sklearn.model_selection (train_test_split)
+sklearn.pipeline (Pipeline)
+sklearn.impute (SimpleImputer)
+sklearn.model_selection (cross_validate)
+sklearn.linear_model (LinearRegression)
+sklearn.ensemble (RandomForestRegressor, RandomForestClassifier)
+sklearn.metrics (silhouette_score)
+tensorflow.keras.models (Sequential)
+tensorflow.keras.layers (Dense)
+tensorflow.keras.optimizers (Adam)
 
-To recreate the models, we need to use the parameters below
 
 Seed: Random_State = 42
-
-Hyperparameters:
-- TBD
 
 ## Techniques & Technologies
 ### Steps taken
@@ -170,9 +203,6 @@ Hyperparameters:
   * .info() was used to check for column types and missing values
   * .unique() was used to check for unique values in categorical columns
   * .describe() was used to generate summary statistics
- 
-  Results:
-  * The Profession column is missing 35 entries
 
 * Pre-analysis, finding correlation: Understanding patterns, correlations, and data distribution
 * Regression analysis and validation: Applying linear regression models to determine key loyalty drivers. and create training and test sets, assessing model accuracy
