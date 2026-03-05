@@ -24,13 +24,14 @@ def prompt_input():
 	df = None
 
 	# Input title
-	st.title("File Input with Submit Button")
+	st.sidebar.title("File Input with Submit Button")
 
-	with st.form(key="file_upload"):
-		# Add a file upload widget to the form
-		uploaded_file = st.file_uploader("Upload a file", type="csv")
-		# Add a summit button to the form
-		submit_button = st.form_submit_button(label='Submit')
+	with st.sidebar:
+		with st.form(key="file_upload"):
+			# Add a file upload widget to the form
+			uploaded_file = st.file_uploader("Upload a file", type="csv")
+			# Add a summit button to the form
+			submit_button = st.form_submit_button(label='Submit')
 
 	if submit_button:
 		if uploaded_file is not None:
@@ -65,7 +66,7 @@ def silhouette(df):
 	"""
 
 	from sklearn.metrics import silhouette_score
-	st.session_state['button_clicked'] = True
+	st.session_state['button_state_silhouette'] = True
 
 	X = df[["annual_income", "spending_score"]]
 
@@ -78,6 +79,8 @@ def silhouette(df):
 		labels = kmeans.fit_predict(X_scaled)
 		score = silhouette_score(X_scaled, labels)
 		st.write(f"K = {k}, Silhouette Score = {score:.4f}")
+
+
 
 
 def display_optimal_k(inertia) :
@@ -96,12 +99,60 @@ def display_optimal_k(inertia) :
 
 	fig, ax=plt.subplots(figsize=(8,5))
 
-	ax=plt.plot(range(1, 10), inertia, marker='o')
-	ax=plt.xlabel("Number of Clusters (K)")
-	ax=plt.ylabel("Inertia")
+	ax = plt.plot(range(1, 10), inertia, marker='o')
+	ax = plt.xlabel("Number of Clusters (K)")
+	ax = plt.ylabel("Inertia")
 
 	#plt.title("Elbow Method")
 
+	st.pyplot(fig)
+
+
+def customer_segment(n_cluster, df, X_scaled):
+	#Fit model using k=4
+	kmeans = KMeans(n_clusters=n_cluster, random_state=42)
+	df["cluster"] = kmeans.fit_predict(X_scaled)
+
+	st.session_state['button_state_cust_clust'] = True
+
+	#Cluster visual
+	#plt.figure(figsize=(8,6))
+	fig, ax = plt.subplots()
+	sns.scatterplot(
+		x="annual_income",
+		y="spending_score",
+		hue="cluster",
+		palette="Set1",
+		data=df
+	)
+	ax = plt.title("Customer Segments")
+	#plt.show()
+	st.pyplot(fig)
+
+def age_income_analysis(n_cluster, df):
+	#Segment analysis useing Age and annual income
+	X = df[["age", "annual_income", "spending_score"]]
+	scaler = StandardScaler()
+
+	X_scaled = scaler.fit_transform(X)
+
+	kmeans = KMeans(n_clusters=n_cluster, random_state=42)
+	df["cluster_3d"] = kmeans.fit_predict(X_scaled)
+
+	st.session_state['button_state_age_income'] = True
+
+	#visualize cluster
+	#plt.figure(figsize=(8,6))
+	fig, ax = plt.subplots()
+	sns.scatterplot(
+		x="annual_income",
+		y="spending_score",
+		hue="cluster_3d",
+		palette="Set2",
+		data=df
+	)
+	ax=plt.title("Clusters (Age + Income + Spending)")
+	#plt.show()
 	st.pyplot(fig)
 
 
@@ -153,10 +204,31 @@ def main() :
 
 		display_optimal_k(inertia)
 
-		if 'button_clicked' not in st.session_state:
-			st.session_state['button_clicked'] = False
+		# Button for silhouette
+		if 'button_state_silhouette' not in st.session_state:
+			st.session_state['button_state_silhouette'] = False
 
-		st.button('Silhouette', on_click=silhouette,  args=(df,))
+		st.sidebar.button('Silhouette', on_click=silhouette,  args=(df,))
+
+		# Display slider and button for Customer Segment clustering
+		if 'button_state_cust_clust' not in st.session_state:
+			st.session_state['button_state_cust_clust'] = False
+
+		n_cluster = st.sidebar.slider("Choose the number of clusters", 2, 8, 4)
+		st.sidebar.button(
+			'Customer Segment', 
+			on_click=customer_segment, 
+			kwargs={"n_cluster": n_cluster, "df": df, "X_scaled": X_scaled})
+
+		# Display button for analysis for Age and Income
+		if 'button_state_age_income' not in st.session_state:
+			st.session_state['button_state_age_income'] = False
+
+		st.sidebar.button(
+			'Age-Income Analysis',
+			on_click=age_income_analysis,
+			kwargs={"n_cluster": n_cluster, "df": df}
+		)
 	else:
 		# Flag error to the callig shell
 		exit_code = -1
