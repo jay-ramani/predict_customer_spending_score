@@ -1,4 +1,4 @@
-### Regression and Clustering of Customer Demographic Data
+### Regression, Neural Net and Clustering of Customer Demographic Data
 
 ## Regression - Prediction of Spending Score
 The Customer.csv dataset contains demographic data including Gender, Age, Annual Income, Profession, Work Experience, and Family Size. Spending Score is also included, appearing to be a derived value. 
@@ -10,6 +10,11 @@ Linear, Polynomial, and Random Forest Regression is performed and cross validati
 - MAE of 23 to 25: demonstrates that if we did try to predict, on average our predictions of spending score would be off by up to 25 points (where Spending Score is measured between 0 to 100) - this is a poor performance, and aligned with the r^2 values we are getting.
  
 The above demonstrates that there is no relationship between the features that could be used to do a prediction of the Spending Score. This is consistent with our Exploratory Data Analaysis (01_eda.ipynb), that shows a similar outcome that there is a lack of correlation between the features. Furthermore, it proves that Spending Score is quite possibly a manufactured value that is not derived through measurement or mathematical calculation from the data, and is therefore not a deterministic function of any of the features in the data. Hence, Regression will not work as an approach to predict Spending Score. 
+
+## Neural Network
+For additional experimentation, a Neural Network was also attempted using the same train test split (20% test) on the dataset. A simple feed forward neural network was set up with Dense layers connected in sequence. The input features are passed through two hidden layers (64 and 32 neurons) with relu activation, with an output layer with linear activation. 
+
+The results are exactly the same as with Regression, where MAE = 24, which is significant for spending score being on a scale of 1 - 100.
 
 ## Clustering - Segmentation of Customers
 
@@ -34,6 +39,7 @@ As a final step, we attempt to evaluate the impact of Age on spending propensity
 ## Key Outcomes
 - Our Exploratory Data Analysis demonstrates there is no correlation between the features and the target variable, and there are missing values, as well as unusual values in the dataset - e.g. Ages less than 18 that have incomes (300+ rows), work experiences of 0, etc.
 - Multiple types of regressions yield r^2 <= 0, and high MAE and MSE, indicating that the features collected are not conducive to predicting spending score using regression techniques, and furthermore informs us that Spending Score is potentially a relative value as opposed to being a mathematical or measured value. 
+- As a final experiment, a feed forward neural network was set up with 2 hiddne layers and one output layer. The resulting MAE was 24, which is significant given spending score ranges between 1 - 100. This aligns with the result we got from the regression exercise as well. 
 - Instead of predicting Spending Score, we switch to attempting to understand customer behavior by clustering the data. Our analysis shows optimal k-value to be used is 4, however our Silhouette score flattening at 0.38 tells us that the dataset does not have strong natural clusters. 
 - Clustering further proves that we get 4 broad clusters, but none of them help us conclude that Age or Income can be an indicator of spending propensity. Furthermore, adding Age reduces cohesiveness of the clusters, showing us that it is not a useful feature to add in for this particular dataset. 
 - Profession categories are broad and overlapping, and do not provide us a deterministic way of understanding if one profession impacts spending propensity over another, as the incomes for professions are also random (there is no trend that a profession necessarily has a higher income over another, and even if it did, we have already proven that income is not a significant indicator of spending).
