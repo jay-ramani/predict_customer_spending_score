@@ -131,26 +131,25 @@ Legal teams dealing with customer privacy would need be involved in what and how
 | Report | Summarize the activities and findings in a final report in the README.md file | Saqib, Jay |
 
 ## Key Findings
-- Our Exploratory Data Analysis demonstrates there is no correlation between the features and the target variable, and there are missing values (35 for Profession) and anomalies in the data that are not logical. Our EDA determines that the Spending Score is likely not related to the remaining features, and is derived as a relative value.
-Results of EDA:
-  * We found the Profession column is missing 35 entries
-  * 14% of customers are under the age of 15, yet still have a profession such as Doctor, etc.
-  * 5% of customers have work experience that is greater than their stated age
-  * 22% of customers have work experience of 0, but still have a profession and income
-  * The gender in the data set is also skewed as 60% female and 40% male, which could affect interpretation if gender is taken as a feature
- For details, refer to EDA notebook: experiments\notebooks\01_eda.ipynb
+Data quality issues were identified during Exploratory Data Analysis. The dataset contains inconsistencies such as missing profession values, unrealistic work experience relative to age, and anomalies in demographic attributes. These issues suggest the data may be partially synthetic or poorly constructed, which limits the predictive power of the features.
 
-- Multiple types of regressions yield r^2 <= 0, and high MAE and MSE, indicating that the features collected are not conducive to predicting spending score using regression techniques, and furthermore informs us that Spending Score is potentially a relative value as opposed to being a mathematical or measured value. 
-For details, refer to regression notebook: experiments\notebooks\02_regression.ipynb
+Regression models were unable to predict Spending Score effectively. Multiple regression approaches produced very low predictive performance (R² ≤ 0 with high MAE/MSE), indicating that the available features do not meaningfully explain variations in spending score.
 
-- As a final experiment, a feed forward neural network was set up with 2 hiddne layers and one output layer. The resulting MAE was 24, which is significant given spending score ranges between 1 - 100. This aligns with the result we got from the regression exercise as well. 
-For details, refer to neural network notebooks: experiments\notebooks\05_neuralnetwork_2.ipynb
+Neural network models produced similar results. A feed-forward neural network with two hidden layers achieved an MAE of approximately 24 on a scale of 1–100, reinforcing that the available variables are insufficient to accurately predict spending behavior.
 
-- Instead of predicting Spending Score, we switch to attempting to understand customer behavior by clustering the data. Our analysis shows optimal k-value to be used is 4, however our Silhouette score flattening at 0.38 tells us that the dataset does not have strong natural clusters. 
-- Clustering further proves that we get 4 broad clusters, but none of them help us conclude that Age or Income can be an indicator of spending propensity. Furthermore, adding Age reduces cohesiveness of the clusters, showing us that it is not a useful feature to add in for this particular dataset. 
-- Profession categories are broad and overlapping, and do not provide us a deterministic way of understanding if one profession impacts spending propensity over another, as the incomes for professions are also random (there is no trend that a profession necessarily has a higher income over another, and even if it did, we have already proven that income is not a significant indicator of spending).
-- At best, these clusters can be used to understand Personas of customers, with some better quality data collection around other features such as the income, ages and professions.
+Customer clustering provided better insights than prediction. Clustering analysis suggested an optimal k = 4, but the relatively low silhouette score (~0.38) indicates weak natural segmentation within the dataset. This suggests that customer behavior is not strongly driven by the available variables such as age, income, or profession.
+
+Demographic variables show limited influence on spending behavior. The clustering results indicate that neither income nor age reliably predicts spending propensity, and profession categories are too broad to provide meaningful differentiation.
+
+The dataset is better suited for exploratory persona analysis than predictive modeling. With improved data collection, particularly around behavioral variables, clustering could be used to identify meaningful customer personas and support marketing strategies.
 For details, refer to clustering notebook: experiments\notebooks\03_clustering.ipynb
+
+## Detailed Business Insights
+
+For a deeper analysis of the customer segments and business recommendations, see:
+
+[Business Insights Report](reports/business_insights.md)
+
 
 ## Instructions
 The setup of the Github repository is as follows:
@@ -267,3 +266,10 @@ The approach of analysis:
 
 
 ## Visuals & Credits
+### Customer Segmentation (Income vs Spending)
+
+![Customer Segments](reports/customer_clusters.png)
+
+This visualization shows customer segmentation using K-Means clustering based on **annual income and spending score**. The clusters illustrate that customers with similar income levels can exhibit very different spending behaviors. High-income customers appear in both high- and low-spending segments, while moderate-income customers also show wide variation in spending patterns.
+
+From a business perspective, this suggests that **income alone is not a reliable predictor of customer spending behavior**. Companies should incorporate additional behavioral data such as purchase history, engagement metrics, or transaction frequency to build more accurate customer value models.
