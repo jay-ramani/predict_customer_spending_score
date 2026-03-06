@@ -51,7 +51,7 @@ def display_prompt_input():
 			if uploaded_file is not None:
 					# Check file type for appropriate reading
 					if uploaded_file.name.endswith('.csv'):
-						st.toast("File successfully uploaded and submitted!", icon="✅", duration=3)
+						st.toast("File successfully uploaded and submitted!", icon="✅", duration=5)
 
 						df = data_cleanup(uploaded_file)
 
@@ -163,7 +163,7 @@ def display_optimal_k(inertia) :
 	# Display optimal K using line graph
 	st.title('Finding Optimal K using K-Means Clustering')
 
-	st.header("Optimal K using Elbow Method")
+	st.header(body="Optimal K using Elbow Method", anchor=False, width="content", text_alignment="left")
 
 	fig, ax=plt.subplots(figsize=(8,5))
 
@@ -250,6 +250,45 @@ def display_age_income_analysis(n_cluster, df):
 	st.pyplot(fig)
 
 
+def display_silhouette_scores(df, k_silhouette_scores, max_silhouette_score, n_cluster):
+	"""
+	Displays the silhouette scores for K=2 to 8 (both values inclusive) and highlights the optimal K based on the highest silhouette score
+
+	Parameters:
+	1. df: Pandas data frame containing the customer data
+	2. k_silhouette_scores: A dictionary containing silhouette scores for each K (number of clusters)
+	3. max_silhouette_score: The highest silhouette score among all K values
+	4. n_cluster: The optimal number of clusters based on the highest silhouette score
+
+	Returns:
+	No return value, but displays a table of silhouette scores for each K and highlights the optimal K
+	"""
+
+	st.title("Silhouette Scores for K=2 to 8")
+	st.header("Optimal K Value (" + str(n_cluster) + ") based on highest Silhouette Score (" + str(round(max_silhouette_score, 4)) + ")", anchor=False, width="content", text_alignment="left")
+
+	if k_silhouette_scores:
+		silhouette_df = pd.DataFrame(list(k_silhouette_scores.items()), columns=["K", "Silhouette Score"])
+		st.dataframe(silhouette_df, width="stretch", height="auto")
+	else:
+		st.write("Silhouette scores not available")
+
+
+def display_shop_custmer_data(df):
+	"""
+	Displays the shop customer data in a tabular format
+
+	Parameters:
+	df: Pandas data frame containing the cleaned and preprocessed customer data
+
+	Returns:
+	No return value, but displays the customer data in a styled table format with missing values highlighted
+	"""
+	st.title("Shop Customer Data")
+	st.header(body="Cleaned and Preprocessed Customer Data", anchor=False, width="content", text_alignment="left")
+	st.dataframe(df.style.highlight_null(), width="stretch", height="auto", placeholder="Missing")
+
+
 def display_prediction():
 	"""
 	Allows user to select a saved KMeans model, input feature values, and predict the cluster assignment for those values
@@ -263,7 +302,7 @@ def display_prediction():
 
 	st.set_page_config(page_title="Customer Segmentation", layout="centered")
 	st.title("Customer Segmentation (KMeans)")
-	st.header("Predict Cluster for New Data")
+	st.header(body="Predict Cluster for New Data", anchor=False, width="content", text_alignment="left")
 	st.caption("Pick a saved model from /models, enter values, and predict the cluster.")
 
 	MODELS_DIR = Path("models")
@@ -396,19 +435,13 @@ def main() :
 		)
 
 		with tab_shop_customer_data:
-			st.title("Shop Customer Data")
-			st.dataframe(df.style.highlight_null(), width="stretch", height="auto", placeholder="Missing")
+			display_shop_custmer_data(df)
 
 		with tab_optimal_k:
 			display_optimal_k(inertia)
 
 		with tab_silhouette_scores:
-			st.title("Silhouette Scores for K=2 to 8")
-			if k_silhouette_scores:
-				silhouette_df = pd.DataFrame(list(k_silhouette_scores.items()), columns=["K", "Silhouette Score"])
-				st.dataframe(silhouette_df, width="stretch", height="auto")
-			else:
-				st.write("Silhouette scores not available")
+			display_silhouette_scores(df, k_silhouette_scores, max_silhouette_score, n_cluster)
 
 		with tab_cust_segments:
 			display_customer_segment(n_cluster, df, X_scaled)
