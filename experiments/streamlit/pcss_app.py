@@ -163,7 +163,7 @@ def display_optimal_k(inertia) :
 	# Display optimal K using line graph
 	st.title('Finding Optimal K using K-Means Clustering')
 
-	st.header(body="Optimal K using Elbow Method", anchor=False, width="content", text_alignment="left")
+	st.header(body="Optimal K Value using Elbow Method", anchor=False, width="content", text_alignment="left")
 
 	fig, ax=plt.subplots(figsize=(8,5))
 
@@ -250,15 +250,14 @@ def display_age_income_analysis(n_cluster, df):
 	st.pyplot(fig)
 
 
-def display_silhouette_scores(df, k_silhouette_scores, max_silhouette_score, n_cluster):
+def display_silhouette_scores(k_silhouette_scores, max_silhouette_score, n_cluster):
 	"""
 	Displays the silhouette scores for K=2 to 8 (both values inclusive) and highlights the optimal K based on the highest silhouette score
 
 	Parameters:
-	1. df: Pandas data frame containing the customer data
-	2. k_silhouette_scores: A dictionary containing silhouette scores for each K (number of clusters)
-	3. max_silhouette_score: The highest silhouette score among all K values
-	4. n_cluster: The optimal number of clusters based on the highest silhouette score
+	1. k_silhouette_scores: A dictionary containing silhouette scores for each K (number of clusters)
+	2. max_silhouette_score: The highest silhouette score among all K values
+	3. n_cluster: The optimal number of clusters based on the highest silhouette score
 
 	Returns:
 	No return value, but displays a table of silhouette scores for each K and highlights the optimal K
@@ -269,6 +268,7 @@ def display_silhouette_scores(df, k_silhouette_scores, max_silhouette_score, n_c
 
 	if k_silhouette_scores:
 		silhouette_df = pd.DataFrame(list(k_silhouette_scores.items()), columns=["K", "Silhouette Score"])
+
 		st.dataframe(silhouette_df, width="stretch", height="auto")
 	else:
 		st.write("Silhouette scores not available")
@@ -441,7 +441,7 @@ def main() :
 			display_optimal_k(inertia)
 
 		with tab_silhouette_scores:
-			display_silhouette_scores(df, k_silhouette_scores, max_silhouette_score, n_cluster)
+			display_silhouette_scores(k_silhouette_scores, max_silhouette_score, n_cluster)
 
 		with tab_cust_segments:
 			display_customer_segment(n_cluster, df, X_scaled)
