@@ -363,6 +363,20 @@ def display_prediction():
 		st.dataframe(X_row)
 
 
+def display_toast_on_reset():
+	"""
+	Displays a toast notification when the user clicks the "Start Over" button to reset the app
+
+	Parameters:
+	No parameters
+
+	Returns:
+	No return value, but shows a toast message indicating that the app has been reset and prompts the user to upload a new file
+	"""
+
+	st.toast("Application reset. Please upload a new file to start over.", icon="🔄", duration=5)
+
+
 def main() :
 	"""
 	Main function to run the Streamlit app for customer segmentation using KMeans clustering. It prompts the
@@ -381,8 +395,7 @@ def main() :
 	exit_code = 0
 
 	# Change working directory to the directory of the script to ensure relative paths work correctly
-	working_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
-	os.chdir(working_directory)
+	os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
 
 	df = display_prompt_input()
 
@@ -429,7 +442,20 @@ def main() :
 		else:
 			n_cluster = 4  # Default to 4 if silhouette scores couldn't be calculated
 
-		st.button(label="Start Over", help="Click to reset the app and upload a new file", icon="🔄", icon_position="right", key=None, on_click=None, shortcut="Ctrl+Alt+S", type="secondary")
+		# Given that any widget interaction will cause a re-run of the entire script, there's no
+		# need to implement complex state management for the buttons. We can simply use the on_click callback
+		# to show a toast, and rely on the fact that any interaction will reset the app state and require the
+		# user to upload a new file to proceed.
+		st.button(
+			label="Start Over",
+			help="Click to reset the app and upload a new file",
+			icon="🔄",
+			icon_position="right",
+			key=None,
+			on_click=display_toast_on_reset,
+			shortcut="Ctrl+Alt+S",
+			type="secondary"
+		)
 
 		tab_shop_customer_data, tab_optimal_k, tab_silhouette_scores, tab_cust_segments, tab_age_income, tab_prediction = st.tabs(
 			["Shop Customer Data", "Optimal K", "Silhouette Scores", "Customer Segments", "Age-Income Analysis", "Prediction"],
