@@ -1,5 +1,33 @@
 ### Regression, Neural Net and Clustering of Customer Demographic Data
 
+Libraries and packages used:
+pandas
+numpy
+matplotlib.pyplot
+seaborn
+sklearn.cluster (KMeans)
+sklearn.preprocessing (StandardScaler, OneHotEncoder, PolynomialFeatures)
+sklearn.compose (ColumnTransformer)
+sklearn.model_selection (train_test_split)
+sklearn.pipeline (Pipeline)
+sklearn.impute (SimpleImputer)
+sklearn.model_selection (cross_validate)
+sklearn.linear_model (LinearRegression)
+sklearn.ensemble (RandomForestRegressor, RandomForestClassifier)
+sklearn.metrics (silhouette_score)
+tensorflow.keras.models (Sequential)
+tensorflow.keras.layers (Dense)
+tensorflow.keras.optimizers (Adam)
+
+## Data Files and Cleanup
+Use the raw data file (Customers.csv) in data\raw\Customers.csv
+Run data_cleanup.py to clean up the data in the file, loaded to data\processed\Customers.csv
+The Clean up (src\data_cleanup.py) is done based on the following rules:
+- Removes customers who are under age 12 to comply with data protection act.
+- Remove records where work experience > age
+- Remove records where family size is greater than 7 to remove outliers
+- Remove records where Profession is null / missing
+
 ## Regression - Prediction of Spending Score
 The Customer.csv dataset contains demographic data including Gender, Age, Annual Income, Profession, Work Experience, and Family Size. Spending Score is also included, appearing to be a derived value. 
 
@@ -37,11 +65,17 @@ We assessed whether Profession could be used as a demographic to determine spend
 As a final step, we attempt to evaluate the impact of Age on spending propensity. Our clustering indicates that combining Age and Income still does not yield cohesive clusters that would determine spending propensity.  
 
 ## Key Outcomes
-- Our Exploratory Data Analysis demonstrates there is no correlation between the features and the target variable, and there are missing values, as well as unusual values in the dataset - e.g. Ages less than 18 that have incomes (300+ rows), work experiences of 0, etc.
+- Our Exploratory Data Analysis demonstrates there is no correlation between the features and the target variable, and there are missing values (35 for Profession) and anomalies in the data that are not logical,e.g. Ages less than 15 that have incomes (300+ rows), work experiences of 0, etc. Our EDA determines that the Spending Score is likely not related to the remaining features, and is derived as a relative value. For details, refer to EDA notebook: experiments\notebooks\01_eda.ipynb
+
 - Multiple types of regressions yield r^2 <= 0, and high MAE and MSE, indicating that the features collected are not conducive to predicting spending score using regression techniques, and furthermore informs us that Spending Score is potentially a relative value as opposed to being a mathematical or measured value. 
+For details, refer to regression notebook: experiments\notebooks\02_regression.ipynb
+
 - As a final experiment, a feed forward neural network was set up with 2 hiddne layers and one output layer. The resulting MAE was 24, which is significant given spending score ranges between 1 - 100. This aligns with the result we got from the regression exercise as well. 
+For details, refer to neural network notebooks: experiments\notebooks\05_neuralnetwork_2.ipynb
+
 - Instead of predicting Spending Score, we switch to attempting to understand customer behavior by clustering the data. Our analysis shows optimal k-value to be used is 4, however our Silhouette score flattening at 0.38 tells us that the dataset does not have strong natural clusters. 
 - Clustering further proves that we get 4 broad clusters, but none of them help us conclude that Age or Income can be an indicator of spending propensity. Furthermore, adding Age reduces cohesiveness of the clusters, showing us that it is not a useful feature to add in for this particular dataset. 
 - Profession categories are broad and overlapping, and do not provide us a deterministic way of understanding if one profession impacts spending propensity over another, as the incomes for professions are also random (there is no trend that a profession necessarily has a higher income over another, and even if it did, we have already proven that income is not a significant indicator of spending).
 - At best, these clusters can be used to understand Personas of customers, with some better quality data collection around other features such as the income, ages and professions.
+For details, refer to clustering notebook: experiments\notebooks\03_clustering.ipynb
 
