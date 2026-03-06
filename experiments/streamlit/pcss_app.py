@@ -9,6 +9,7 @@ import pandas as pd
 import streamlit as st
 from pathlib import Path
 import joblib
+import sys
 import os
 import time
 
@@ -410,6 +411,10 @@ def main() :
 	"""
 
 	exit_code = 0
+
+	# Change working directory to the directory of the script to ensure relative paths work correctly
+	working_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
+	os.chdir(working_directory)
 
 	df = display_prompt_input()
 
