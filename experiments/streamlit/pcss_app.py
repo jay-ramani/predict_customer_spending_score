@@ -299,68 +299,100 @@ def display_prediction():
 	Returns:
 	No return value, but displays the predicted cluster assignment based on user input and the selected model
 	"""
+	with st.form(key="prediction"):
+		st.set_page_config(page_title="Customer Segmentation", layout="centered")
+		st.title("Customer Segmentation (KMeans)")
+		st.header(body="Predict Cluster for New Data", anchor=False, width="content", text_alignment="left")
+		st.caption("Pick a saved model from /models, enter values, and predict the cluster.")
 
-	st.set_page_config(page_title="Customer Segmentation", layout="centered")
-	st.title("Customer Segmentation (KMeans)")
-	st.header(body="Predict Cluster for New Data", anchor=False, width="content", text_alignment="left")
-	st.caption("Pick a saved model from /models, enter values, and predict the cluster.")
+		MODELS_DIR = Path("models")
+		if not MODELS_DIR.exists():
+			st.error("models/ folder not found. Create it and put your saved model files inside.")
+			st.stop()
 
-	MODELS_DIR = Path("models")
-	if not MODELS_DIR.exists():
-		st.error("models/ folder not found. Create it and put your saved model files inside.")
-		st.stop()
+		# Find model files
+		model_files = sorted(list(MODELS_DIR.glob("*.joblib")) + list(MODELS_DIR.glob("*.pkl")))
+		if not model_files:
+			st.error("No model files found in models/. Add *.joblib or *.pkl files.")
+			st.stop()
 
-	# Find model files
-	model_files = sorted(list(MODELS_DIR.glob("*.joblib")) + list(MODELS_DIR.glob("*.pkl")))
-	if not model_files:
-		st.error("No model files found in models/. Add *.joblib or *.pkl files.")
-		st.stop()
+		selected_file = st.selectbox(
+			"Choose a model file",
+			options=model_files,
+			format_func=lambda p: p.name
+		)
 
-	selected_file = st.selectbox(
-		"Choose a model file",
-		options=model_files,
-		format_func=lambda p: p.name
-	)
+		@st.cache_resource
+		def load_artifact(path: str):
+			return joblib.load(path)
 
-	@st.cache_resource
-	def load_artifact(path: str):
-		return joblib.load(path)
+		artifact = load_artifact(str(selected_file))
 
-	artifact = load_artifact(str(selected_file))
+		# Support either "artifact is pipeline" OR "artifact is dict with pipeline/features"
+		if hasattr(artifact, "predict"):
+			pipeline = artifact
+			# If it's just a pipeline, you must manually define features here:
+			st.warning("This model file is a raw pipeline. Feature list is not stored. Add features to the saved artifact for easier use.")
+			features = st.text_input("Enter feature names (comma-separated)", "annual_income,spending_score")
+			features = [f.strip() for f in features.split(",") if f.strip()]
+			model_name = selected_file.stem
+		else:
+			pipeline = artifact.get("pipeline")
+			features = artifact.get("features", [])
+			model_name = artifact.get("model_name", selected_file.stem)
 
-	# Support either "artifact is pipeline" OR "artifact is dict with pipeline/features"
-	if hasattr(artifact, "predict"):
-		pipeline = artifact
-		# If it's just a pipeline, you must manually define features here:
-		st.warning("This model file is a raw pipeline. Feature list is not stored. Add features to the saved artifact for easier use.")
-		features = st.text_input("Enter feature names (comma-separated)", "annual_income,spending_score")
-		features = [f.strip() for f in features.split(",") if f.strip()]
-		model_name = selected_file.stem
-	else:
-		pipeline = artifact.get("pipeline")
-		features = artifact.get("features", [])
-		model_name = artifact.get("model_name", selected_file.stem)
+		if pipeline is None or not features:
+			st.error("This model artifact is missing 'pipeline' or 'features'. Re-save the model including these fields.")
+			st.stop()
 
-	if pipeline is None or not features:
-		st.error("This model artifact is missing 'pipeline' or 'features'. Re-save the model including these fields.")
-		st.stop()
+		st.subheader("Model")
+		st.write(f"**{model_name}**")
+		st.write("**Features:**", ", ".join(features))
 
-	st.subheader("Model")
-	st.write(f"**{model_name}**")
-	st.write("**Features:**", ", ".join(features))
+		#st.subheader("Inputs")
+		#user_inputs = {}
+		#for f in features:
+		#	user_inputs[f] = st.number_input(f, value=0.0, step=1.0)
 
-	st.subheader("Inputs")
-	user_inputs = {}
-	for f in features:
-		user_inputs[f] = st.number_input(f, value=0.0, step=1.0)
+		#if st.button("Predict Cluster", type="primary"):
+		#	X_row = pd.DataFrame([[user_inputs[f] for f in features]], columns=features)
+		#	pred = pipeline.predict(X_row)
+		#	cluster_id = int(pred[0])
+		#	st.success(f"Predicted cluster: **{cluster_id}**")
+		#	st.dataframe(X_row)
 
-	if st.button("Predict Cluster", type="primary"):
-		X_row = pd.DataFrame([[user_inputs[f] for f in features]], columns=features)
-		pred = pipeline.predict(X_row)
-		cluster_id = int(pred[0])
-		st.success(f"Predicted cluster: **{cluster_id}**")
-		st.dataframe(X_row)
+		st.subheader("Batch Prediction")
 
+		uploaded_file = st.file_uploader("Upload CSV file", type="csv")
+
+		if uploaded_file is not None:
+			df_input = pd.read_csv(uploaded_file)
+
+			X_batch = df_input[features].copy()
+			preds = pipeline.predict(X_batch)
+
+			cluster_labels = artifact.get("cluster_labels", {})
+			cluster_note = artifact.get("cluster_note", "")
+
+			result_df = X_batch.copy()
+			result_df["predicted_cluster"] = preds
+			result_df["cluster_description"] = result_df["predicted_cluster"].map(cluster_labels)
+
+			if cluster_note:
+				st.info(cluster_note)
+
+			st.success("Prediction completed")
+			st.dataframe(result_df.head())
+
+			csv_data = result_df.to_csv(index=False).encode("utf-8")
+
+			st.download_button(
+				label="Download Predictions",
+				data=csv_data,
+				file_name="predicted_clusters.csv",
+				mime="text/csv"
+			)
+		submitted = st.form_submit_button("Done")
 
 def main() :
 	"""
