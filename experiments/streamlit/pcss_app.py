@@ -6,7 +6,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import streamlit as st
+from pathlib import Path
 import joblib
+import os
+
 
 def prompt_input():
 	"""
@@ -39,7 +42,7 @@ def prompt_input():
 				# Check file type for appropriate reading
 				if uploaded_file.name.endswith('.csv'):
 					st.success("File successfully uploaded and submitted!")
-					df = pd.read_csv(uploaded_file)
+					df = data_cleanup(uploaded_file)
 					st.write("File contents (first 5 rows):", df.head())
 					#finding_optimal_K(df)
 				else:
@@ -52,7 +55,49 @@ def prompt_input():
 	return df
 
 
-# Use Silhouette score to measure how well each data point fits within its assigned cluster compared to other clusters.
+def data_cleanup(uploaded_file):
+	'''
+	This function takes the raw uploaded .csv file, cleans and preprocesses.
+
+	Parameters:
+	Raw .csv file
+
+	Return:
+	Processed Pandas data frame
+	'''
+
+	#Read the data file Customers.csv into dataframe, and inspect first few rows
+	df = pd.read_csv(uploaded_file)
+
+	#Remove customers who are under age 12 to comply with data protection act.
+	df = df[df["Age"] >= 12]
+
+	#Remove records where work experience > age
+	df = df[df["Work Experience"] <= df['Age']]
+
+	#Remove records where family size is greater than 7 to remove outliers
+	df = df[(df["Family Size"] <= 7)]
+
+	#Remove records where family size is greater than 7 to remove outliers
+	df = df[df["Profession"].notna()]
+
+	#Renamed column names to snake case for easier reference in code
+	df = df.rename(
+		columns = {
+			'Gender': 'gender',
+			'Age': 'age',
+			'Annual Income ($)': 'annual_income',
+			'Spending Score (1-100)': 'spending_score',
+			'Profession': 'profession',
+			'Work Experience': 'work_experience',
+			'Family Size': 'family_size',
+		}
+	)
+
+	return df
+
+
+
 def silhouette(df):
 	"""
 	Use Silhouette score to measure how well each data point fits within
@@ -156,6 +201,68 @@ def age_income_analysis(n_cluster, df):
 	st.pyplot(fig)
 
 
+def prediction():
+	st.set_page_config(page_title="Customer Segmentation", layout="centered")
+	st.title("Customer Segmentation (KMeans)")
+	st.caption("Pick a saved model from /models, enter values, and predict the cluster.")
+
+	MODELS_DIR = Path("models")
+	if not MODELS_DIR.exists():
+		st.error("models/ folder not found. Create it and put your saved model files inside.")
+		st.stop()
+
+	# Find model files
+	model_files = sorted(list(MODELS_DIR.glob("*.joblib")) + list(MODELS_DIR.glob("*.pkl")))
+	if not model_files:
+		st.error("No model files found in models/. Add *.joblib or *.pkl files.")
+		st.stop()
+
+	selected_file = st.selectbox(
+		"Choose a model file",
+		options=model_files,
+		format_func=lambda p: p.name
+	)
+
+	@st.cache_resource
+	def load_artifact(path: str):
+		return joblib.load(path)
+
+	artifact = load_artifact(str(selected_file))
+
+	# Support either "artifact is pipeline" OR "artifact is dict with pipeline/features"
+	if hasattr(artifact, "predict"):
+		pipeline = artifact
+		# If it's just a pipeline, you must manually define features here:
+		st.warning("This model file is a raw pipeline. Feature list is not stored. Add features to the saved artifact for easier use.")
+		features = st.text_input("Enter feature names (comma-separated)", "annual_income,spending_score")
+		features = [f.strip() for f in features.split(",") if f.strip()]
+		model_name = selected_file.stem
+	else:
+		pipeline = artifact.get("pipeline")
+		features = artifact.get("features", [])
+		model_name = artifact.get("model_name", selected_file.stem)
+
+	if pipeline is None or not features:
+		st.error("This model artifact is missing 'pipeline' or 'features'. Re-save the model including these fields.")
+		st.stop()
+
+	st.subheader("Model")
+	st.write(f"**{model_name}**")
+	st.write("**Features:**", ", ".join(features))
+
+	st.subheader("Inputs")
+	user_inputs = {}
+	for f in features:
+		user_inputs[f] = st.number_input(f, value=0.0, step=1.0)
+
+	if st.button("Predict Cluster", type="primary"):
+		X_row = pd.DataFrame([[user_inputs[f] for f in features]], columns=features)
+		pred = pipeline.predict(X_row)
+		cluster_id = int(pred[0])
+		st.success(f"Predicted cluster: **{cluster_id}**")
+		st.dataframe(X_row)
+
+
 def main() :
 	"""
 	Entry point of this program
@@ -206,15 +313,15 @@ def main() :
 
 		# Button for silhouette
 		if 'button_state_silhouette' not in st.session_state:
-			st.session_state['button_state_silhouette'] = False
+			st.session_state['button_state_silhouette'] = True
 
 		st.sidebar.button('Silhouette', on_click=silhouette,  args=(df,))
 
 		# Display slider and button for Customer Segment clustering
 		if 'button_state_cust_clust' not in st.session_state:
-			st.session_state['button_state_cust_clust'] = False
-
-		n_cluster = st.sidebar.slider("Choose the number of clusters", 2, 8, 4)
+			st.session_state['button_state_cust_clust'] = True
+		n_cluster = 4
+		#n_cluster = st.sidebar.slider("Choose the number of clusters", 2, 8, 4)
 		st.sidebar.button(
 			'Customer Segment', 
 			on_click=customer_segment, 
@@ -222,12 +329,20 @@ def main() :
 
 		# Display button for analysis for Age and Income
 		if 'button_state_age_income' not in st.session_state:
-			st.session_state['button_state_age_income'] = False
+			st.session_state['button_state_age_income'] = True
 
 		st.sidebar.button(
 			'Age-Income Analysis',
 			on_click=age_income_analysis,
 			kwargs={"n_cluster": n_cluster, "df": df}
+		)
+
+		if 'button_state_prediction' not in st.session_state:
+			st.session_state['button_state_prediction'] = True
+		
+		st.sidebar.button(
+			'Prediction',
+			on_click=prediction
 		)
 	else:
 		# Flag error to the callig shell
