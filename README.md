@@ -70,6 +70,7 @@ We are working with a dataset representing an imaginative shop’s ideal custome
 * There is a relative equal distribution of customers across all age groups from 0-99 which may skew the model
 * There is gender imbalance with 1186 females vs 814 males. Any insights modeled with respect to gender may bias towards females
 * Artists (612 entries representing ~30%) and Healthcare (339 entries representing ~17%) professions together denote almost 50% of all professions in the dataset. This may not represent real world population and may skew our model results towards those two professions
+* There are 35 values for Profession that are missing, which can impact the clustering and also possibly make those rows less useful if Profession is an impactful feature
 * The dataset does not include a temporal feature, thus the models will not be able to account for seasonality or changes in customers behaviour overtime
 * There are 81 entries (representing ~4% of the dataset) where the work experience is greater than the age
 * A large number of entries have 1 year or less in work experience with 901 entries
