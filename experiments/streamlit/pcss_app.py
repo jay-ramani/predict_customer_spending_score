@@ -9,6 +9,7 @@ import pandas as pd
 import streamlit as st
 from pathlib import Path
 import joblib
+import sys
 import os
 import time
 
@@ -305,7 +306,7 @@ def display_prediction():
 	st.header(body="Predict Cluster for New Data", anchor=False, width="content", text_alignment="left")
 	st.caption("Pick a saved model from /models, enter values, and predict the cluster.")
 
-	MODELS_DIR = Path("models")
+	MODELS_DIR = Path("../../models")
 	if not MODELS_DIR.exists():
 		st.error("models/ folder not found. Create it and put your saved model files inside.")
 		st.stop()
@@ -378,6 +379,10 @@ def main() :
 	"""
 
 	exit_code = 0
+
+	# Change working directory to the directory of the script to ensure relative paths work correctly
+	working_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
+	os.chdir(working_directory)
 
 	df = display_prompt_input()
 
