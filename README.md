@@ -101,8 +101,10 @@ The goal of this project is to analyze customer characteristics to understand sp
 In summary, this project applies both predictive modeling and customer segmentation techniques to understand spending behavior. By comparing supervised and unsupervised approaches, the study evaluates how customer data can best support informed marketing and business decisions.
 
 ### Success Metrics
-1. At a minimum, 80% accuracy in comparison to the customer spending score published in the dataset.
-2. Also, the ability to predict the score with missing fields like profession, family size etc..
+1. MAE of 5 to 10 (on Spending Score ranging from 1 - 100)
+2. R^2 > 0.7
+3. Clusters that show clear segmentation of personas that can be used to determine spending propensity based on features such as income, age, profession etc.
+4. Determination of whether the data is of a usable quality or not to perform the regression and produce a useful clustering outcome and personas
 
 ### Stakeholders
 In a corporate setting, we could have the following stakeholders
@@ -154,47 +156,24 @@ For details, refer to neural network notebooks: experiments\notebooks\05_neuraln
 For details, refer to clustering notebook: experiments\notebooks\03_clustering.ipynb
 
 ## Instructions
-The setup of the Github repository is as follows:
-```bash
-Predict_Customer_Spending_Score
-    data
-        processed
-        raw
-        sql
-    experiments
-        experiment#
-        README.md
-    models
-        model_notebook
-        README.md
-    reports
-        README.md
-    src
-        README.md
-    .gitignore
-    README.md
-```
+
 Libraries and packages used:
 pandas
 numpy
-matplotlib.pyplot
+matplotlib
 seaborn
-sklearn.cluster (KMeans)
-sklearn.preprocessing (StandardScaler, OneHotEncoder, PolynomialFeatures)
-sklearn.compose (ColumnTransformer)
-sklearn.model_selection (train_test_split)
-sklearn.pipeline (Pipeline)
-sklearn.impute (SimpleImputer)
-sklearn.model_selection (cross_validate)
-sklearn.linear_model (LinearRegression)
-sklearn.ensemble (RandomForestRegressor, RandomForestClassifier)
-sklearn.metrics (silhouette_score)
-tensorflow.keras.models (Sequential)
-tensorflow.keras.layers (Dense)
-tensorflow.keras.optimizers (Adam)
-
+sklearn
+tensorflow
 
 Seed: Random_State = 42
+
+1. Save raw data file (Customers.csv) in \data\raw\
+2. Execute data_cleanup.py to perform a cleanup of the raw data (for details of the clean up rules, refer to src\data_cleanup.py)
+3. The clean file will be saved to \data\processed\
+4. Run the EDA notebook cells (experiments\notebooks\01_eda.ipynb) to perform the exploratory data analysis
+5. If the EDA results in findings that show there is a correlation between features and the target, then run the regression notebook (experiments\notebooks\02_regression.ipynb) 
+6. If the EDA results in findings that there is no correlation or relationship between features and the target, then move ahead to run the clustering notebook (experiments\notebooks\03_clustering.ipynb) - choose the k values based on the maximum silhouette score, to observe the clusters; use the clusters to define customer groupings and segmentation, and personas that can be used to understand where to direct marketing campaigns
+ 
 
 ## Techniques & Technologies
 ### Steps taken
