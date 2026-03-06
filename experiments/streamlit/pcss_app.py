@@ -59,11 +59,11 @@ def display_prompt_input():
 							placeholder.empty()  # Clear the placeholder content after processing
 							st.empty()
 						else:
-							st.error("Data cleanup failed. Please check the file format and contents.")
+							st.toast("Data cleanup failed. Please check the file format and contents.", icon="⚠️", duration="infinite")
 					else:
-						st.write("File type not handled in this example, but uploaded successfully.")
+						st.toast("File type not handled in this example, but uploaded successfully.", icon="⚠️", duration="infinite")
 			else:
-				st.warning("Please upload a file before submitting.")
+				st.toast("Please upload a file before submitting.", icon="⚠️", duration="infinite")
 
 	return df
 
@@ -385,6 +385,8 @@ def main() :
 		else:
 			n_cluster = 4  # Default to 4 if silhouette scores couldn't be calculated
 
+		st.button(label="Start Over", help="Click to reset the app and upload a new file", icon="🔄", icon_position="right", key=None, on_click=None, shortcut="Ctrl+Alt+S", type="secondary")
+
 		tab_shop_customer_data, tab_optimal_k, tab_silhouette_scores, tab_cust_segments, tab_age_income, tab_prediction = st.tabs(
 			["Shop Customer Data", "Optimal K", "Silhouette Scores", "Customer Segments", "Age-Income Analysis", "Prediction"],
 			width="stretch",
@@ -395,7 +397,6 @@ def main() :
 
 		with tab_shop_customer_data:
 			st.title("Shop Customer Data")
-			#st.write("File contents (first 5 rows):", df.head())
 			st.dataframe(df.style.highlight_null(), width="stretch", height="auto", placeholder="Missing")
 
 		with tab_optimal_k:
