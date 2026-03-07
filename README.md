@@ -37,7 +37,6 @@ If predictive performance is insufficient, Stage 2 shifts toward extracting busi
 
 This staged approach ensures that the project remains outcome-focused. Whether through predictive modeling or segmentation, the goal is to generate actionable retail insights rather than forcing model performance.
 
-
 ## Addressing the Business Question
 We begin by validating and cleaning the dataset, removing logically inconsistent records such as invalid ages or impossible work experience values. Two feature scenarios are then constructed: a limited-feature model using Age, Annual Income, and Work Experience, and a broader model that may incorporate Gender, Profession, and Family Size.
 
@@ -49,6 +48,8 @@ The [Shop Customer dataset from Kaggle](https://www.kaggle.com/datasets/datascie
 The data represents customer information collected by a fictional retail store through its membership program. Each row corresponds to one customer and includes demographic (age, gender, family size), socioeconomic (income, profession, work experience), and behavioral (spending score) attributes.
 
 The dataset contains **2,000 records** and **8 features**.
+
+For a detailed exploratory analysis of the raw dataset, refer [documentation](data/raw/README.md).
 
 #### Dataset Schema
 
@@ -145,14 +146,14 @@ Customer clustering provided better insights than prediction. Clustering analysi
 Demographic variables show limited influence on spending behavior. The clustering results indicate that neither income nor age reliably predicts spending propensity, and profession categories are too broad to provide meaningful differentiation.
 
 The dataset is better suited for exploratory persona analysis than predictive modeling. With improved data collection, particularly around behavioral variables, clustering could be used to identify meaningful customer personas and support marketing strategies.
-For details, refer to clustering notebook: experiments\notebooks\03_clustering.ipynb
+
+For details, refer to clustering notebook: experiments\notebooks\03_clustering.ipynb.
 
 ## Detailed Business Insights
 
 For a deeper analysis of the customer segments and business recommendations, see:
 
 [Business Insights Report](reports/business_insights.md)
-
 
 ## Instructions
 
@@ -170,14 +171,14 @@ Seed: Random_State = 42
 2. Execute data_cleanup.py to perform a cleanup of the raw data (for details of the clean up rules, refer to src\data_cleanup.py)
 3. The clean file will be saved to \data\processed\
 4. Run the EDA notebook cells (experiments\notebooks\01_eda.ipynb) to perform the exploratory data analysis
-5. If the EDA results in findings that show there is a correlation between features and the target, then run the regression notebook (experiments\notebooks\02_regression.ipynb) 
+5. If the EDA results in findings that show there is a correlation between features and the target, then run the regression notebook (experiments\notebooks\02_regression.ipynb)
 6. If the EDA results in findings that there is no correlation or relationship between features and the target, then move ahead to run the clustering notebook (experiments\notebooks\03_clustering.ipynb) - choose the k values based on the maximum silhouette score, to observe the clusters; use the clusters to define customer groupings and segmentation, and personas that can be used to understand where to direct marketing campaigns
- 
+
 
 ## Techniques & Technologies
 ### Steps taken
 * Data Cleaning: Handling missing values, removing inconsistencies, and ensuring data readiness
-  
+
   Method:
   * .info() was used to check for column types and missing values
   * .unique() was used to check for unique values in categorical columns
@@ -191,39 +192,39 @@ Seed: Random_State = 42
 ### Exploratory Data Analysis
 * Visualize distribution, median, quartiles and outliers for every numeric feature
   * Distribution of age
-    
+
     <img width="571" height="455" alt="Untitled" src="https://github.com/user-attachments/assets/afa911b8-2519-4a53-ac79-82c927be04ce" />
   * Boxplot of age
-    
+
     <img width="520" height="455" alt="Untitled" src="https://github.com/user-attachments/assets/edc440ad-8232-4452-b59a-0e0c342a2d94" />
   * Distribution of annual_income
-    
+
     <img width="571" height="455" alt="Untitled-1" src="https://github.com/user-attachments/assets/5c8272b9-9e3b-4515-82aa-84e501c75c87" />
   * Boxplot of annual_income
-    
+
     <img width="520" height="455" alt="Untitled" src="https://github.com/user-attachments/assets/c67f1d11-3b92-4f85-a96e-649ab842930e" />
   * Distribution of family_size
-    
+
     <img width="571" height="455" alt="Untitled-1" src="https://github.com/user-attachments/assets/14f96439-d6bd-4ae9-8224-dee46cb1ccc0" />
   * Boxplot of family_size
-    
+
     <img width="520" height="455" alt="Untitled" src="https://github.com/user-attachments/assets/e7855b89-3a0d-466e-b7af-4b3c934cdf00" />
   * Distribution of work_experience
-    
+
     <img width="577" height="455" alt="Untitled-1" src="https://github.com/user-attachments/assets/cf7f7c03-cc04-45f1-a78c-7651960b0652" />
   * Boxplot of work_experience
-    
+
     <img width="526" height="455" alt="Untitled" src="https://github.com/user-attachments/assets/5786bde8-8711-471f-8b4f-57a799459164" />
   * Distribution of spending_score
-    
+
     <img width="571" height="455" alt="Untitled-1" src="https://github.com/user-attachments/assets/35f9d95d-b50c-4eb5-acbb-51b7de617c86" />
   * Boxplot of spending_score
-    
+
     <img width="520" height="455" alt="Untitled" src="https://github.com/user-attachments/assets/b87dabb0-e837-4f09-acbb-14ff15aa7d2b" />
   * Heatmap of features
-    
+
     <img width="729" height="614" alt="Untitled-1" src="https://github.com/user-attachments/assets/c94e7ff5-042f-402a-9f00-b141e85e0d28" />
-    
+
     As we can see from the above heatmap, there is no strong linear relationship between any single feature and spending score. Hence, regression is highly unlikely to be a suitable approach.
 
 ### Approach of Analysis
