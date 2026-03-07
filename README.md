@@ -239,11 +239,11 @@ The approach of analysis:
 * Programming Language: Python
 
 * Libraries Used:
-** Numpy: matrix operations
-** Pandas: data analysis
-** Matplotlib: creating graphs and plots
-** Seaborn: enhancing matplotlib plots
-** SKLearn: regression analysis
+  * Numpy: matrix operations
+  * Pandas: data analysis
+  * Matplotlib: creating graphs and plots
+  * Seaborn: enhancing matplotlib plots
+  * SKLearn: regression analysis
 
 
 ## Visuals & Credits
