@@ -244,6 +244,7 @@ The approach of analysis:
   * Matplotlib: creating graphs and plots
   * Seaborn: enhancing matplotlib plots
   * SKLearn: regression analysis
+  * Tensorflow: neural networks
 
 
 ## Visuals & Credits
