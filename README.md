@@ -256,7 +256,11 @@ The approach of analysis:
 
 ![Customer Segments](reports/customer_clusters.png)
 
-This visualization shows customer segmentation using K-Means clustering based on **annual income and spending score**. The clusters illustrate that customers with similar income levels can exhibit very different spending behaviors. High-income customers appear in both high- and low-spending segments, while moderate-income customers also show wide variation in spending patterns.
+This visualization shows customer segmentation using K-Means clustering based on **annual income and spending score**. The clusters illustrate that customers with similar income levels can exhibit very different spending behaviors. High-income customers appear in both high- and low-spending segments, while moderate-income customers also show wide variation in spending patterns. From this, we can generate 4 basic personas for customers as a starting point:  
+* High income, high spend: the “target” customer that we want to market to and continue to drive engagement and spend
+* High income, low spend: the “untapped” customer that we can perform further analysis on and do more personalized marketing and loyalty campaigns
+* Low income, high spend: the “impulsive” customer that will spend anyway, and may not need to be explicitly targeted
+* Low income, low spend: the “budget” customer that needs to be made aware of specific categories and promotions through targeted campaigns
 
 From a business perspective, this suggests that **income alone is not a reliable predictor of customer spending behavior**. Companies should incorporate additional behavioral data such as purchase history, engagement metrics, or transaction frequency to build more accurate customer value models.
 
