@@ -145,7 +145,11 @@ Customer clustering provided better insights than prediction. Clustering analysi
 
 Demographic variables show limited influence on spending behavior. The clustering results indicate that neither income nor age reliably predicts spending propensity, and profession categories are too broad to provide meaningful differentiation.
 
-The dataset is better suited for exploratory persona analysis than predictive modeling. With improved data collection, particularly around behavioral variables, clustering could be used to identify meaningful customer personas and support marketing strategies.
+The dataset is better suited for exploratory persona analysis than predictive modeling. With improved data collection, particularly around customer transaction behavior and customer engagement (loyalty etc.), clustering could be used to identify meaningful customer personas and support marketing strategies. For now, the following 4 basic personas can be derived from the analysis:
+* High income, high spend: the “target” customer that we want to market to and continue to drive engagement and spend
+* High income, low spend: the “untapped” customer that we can perform further analysis on and do more personalized marketing and loyalty campaigns
+* Low income, high spend: the “impulsive” customer that will spend anyway, and may not need to be explicitly targeted
+* Low income, low spend: the “budget” customer that needs to be made aware of specific categories and promotions through targeted campaigns
 
 For details, refer to clustering notebook: experiments\notebooks\03_clustering.ipynb.
 
@@ -255,3 +259,10 @@ The approach of analysis:
 This visualization shows customer segmentation using K-Means clustering based on **annual income and spending score**. The clusters illustrate that customers with similar income levels can exhibit very different spending behaviors. High-income customers appear in both high- and low-spending segments, while moderate-income customers also show wide variation in spending patterns.
 
 From a business perspective, this suggests that **income alone is not a reliable predictor of customer spending behavior**. Companies should incorporate additional behavioral data such as purchase history, engagement metrics, or transaction frequency to build more accurate customer value models.
+
+## Team Reflection Videos
+Itzel Polin: 
+Jay Ramani: 
+Ganga Ratnam:
+Saqib Syed: https://drive.google.com/file/d/1qywp3ngcWI1XYj7U0xTNlNCjgqcJZPfN/view?usp=drive_link
+Stanley Wong:
