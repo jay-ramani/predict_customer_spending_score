@@ -26,11 +26,15 @@ def display_prompt_input():
 	Returns:
 	Pandas data frame containing the cleaned and preprocessed customer data, or None if no valid file was uploaded
 	"""
-
+	
+	if "clean_df" in st.session_state:
+		return st.session_state["clean_df"]
+	
 	df = None
 
 	# Start with a blank slate
 	placeholder = st.empty()
+	
 
 	with st.empty():
 		# Input title
@@ -57,6 +61,7 @@ def display_prompt_input():
 						df = data_cleanup(uploaded_file)
 
 						if df is not None:
+							st.session_state["clean_df"] = df
 							placeholder.empty()  # Clear the placeholder content after processing
 							st.empty()
 						else:
@@ -69,6 +74,7 @@ def display_prompt_input():
 	return df
 
 
+@st.cache_data
 def data_cleanup(uploaded_file):
 	'''
 	This function takes the raw uploaded .csv file, cleans and preprocesses.
@@ -289,33 +295,30 @@ def display_shop_custmer_data(df):
 	st.header(body="Cleaned and Preprocessed Customer Data", anchor=False, width="content", text_alignment="left")
 	st.dataframe(df.style.highlight_null(), width="stretch", height="auto", placeholder="Missing")
 
-
 def display_prediction():
 	"""
-	Allows user to select a saved KMeans model, input feature values, and predict the cluster assignment for those values
-
-	Parameters:
-	No parameters
-
-	Returns:
-	No return value, but displays the predicted cluster assignment based on user input and the selected model
+	Predict clusters using the cleaned dataframe already uploaded
 	"""
 
-	st.set_page_config(page_title="Customer Segmentation", layout="centered")
-	st.title("Customer Segmentation (KMeans)")
-	st.header(body="Predict Cluster for New Data", anchor=False, width="content", text_alignment="left")
-	st.caption("Pick a saved model from /models, enter values, and predict the cluster.")
+	st.title("Customer Segmentation Prediction")
+
+	if "clean_df" not in st.session_state:
+		st.warning("Upload and process a dataset first.")
+		return
+
+	df = st.session_state["clean_df"]
 
 	MODELS_DIR = Path("../../models")
-	if not MODELS_DIR.exists():
-		st.error("models/ folder not found. Create it and put your saved model files inside.")
-		st.stop()
 
-	# Find model files
+	if not MODELS_DIR.exists():
+		st.error("models folder not found.")
+		return
+
 	model_files = sorted(list(MODELS_DIR.glob("*.joblib")) + list(MODELS_DIR.glob("*.pkl")))
+
 	if not model_files:
-		st.error("No model files found in models/. Add *.joblib or *.pkl files.")
-		st.stop()
+		st.error("No model files found in models folder.")
+		return
 
 	selected_file = st.selectbox(
 		"Choose a model file",
@@ -324,57 +327,72 @@ def display_prediction():
 	)
 
 	@st.cache_resource
-	def load_artifact(path: str):
+	def load_artifact(path):
 		return joblib.load(path)
 
 	artifact = load_artifact(str(selected_file))
 
-	# Support either "artifact is pipeline" OR "artifact is dict with pipeline/features"
-	if hasattr(artifact, "predict"):
-		pipeline = artifact
-		# If it's just a pipeline, you must manually define features here:
-		st.warning("This model file is a raw pipeline. Feature list is not stored. Add features to the saved artifact for easier use.")
-		features = st.text_input("Enter feature names (comma-separated)", "annual_income,spending_score")
-		features = [f.strip() for f in features.split(",") if f.strip()]
-		model_name = selected_file.stem
-	else:
-		pipeline = artifact.get("pipeline")
-		features = artifact.get("features", [])
-		model_name = artifact.get("model_name", selected_file.stem)
+	pipeline = artifact.get("pipeline")
+	features = artifact.get("features", [])
+	cluster_labels = artifact.get("cluster_labels", {})
+	cluster_note = artifact.get("cluster_note", "")
 
 	if pipeline is None or not features:
-		st.error("This model artifact is missing 'pipeline' or 'features'. Re-save the model including these fields.")
-		st.stop()
+		st.error("Model artifact missing pipeline or features.")
+		return
 
 	st.subheader("Model")
-	st.write(f"**{model_name}**")
-	st.write("**Features:**", ", ".join(features))
+	st.write("Model:", artifact.get("model_name", selected_file.stem))
+	st.write("Features:", ", ".join(features))
 
-	st.subheader("Inputs")
-	user_inputs = {}
-	for f in features:
-		user_inputs[f] = st.number_input(f, value=0.0, step=1.0)
+	if st.button("Run Prediction"):
 
-	if st.button("Predict Cluster", type="primary"):
-		X_row = pd.DataFrame([[user_inputs[f] for f in features]], columns=features)
-		pred = pipeline.predict(X_row)
-		cluster_id = int(pred[0])
-		st.success(f"Predicted cluster: **{cluster_id}**")
-		st.dataframe(X_row)
+		X_batch = df[features].copy()
 
+		preds = pipeline.predict(X_batch)
+
+		result_df = df.copy()
+		result_df["predicted_cluster"] = preds
+		result_df["cluster_description"] = result_df["predicted_cluster"].map(cluster_labels)
+
+		if cluster_note:
+			st.info(cluster_note)
+
+		st.success("Prediction completed")
+
+		st.dataframe(result_df)
+
+		csv_data = result_df.to_csv(index=False).encode("utf-8")
+
+		st.download_button(
+			label="Download Predictions",
+			data=csv_data,
+			file_name="predicted_clusters.csv",
+			mime="text/csv"
+		)
 
 def display_toast_on_reset():
-	"""
-	Displays a toast notification when the user clicks the "Start Over" button to reset the app
+    if "clean_df" in st.session_state:
+        del st.session_state["clean_df"]
 
-	Parameters:
-	No parameters
+    st.toast(
+        "Application reset. Please upload a new file.",
+        icon="🔄",
+        duration=5
+    )
 
-	Returns:
-	No return value, but shows a toast message indicating that the app has been reset and prompts the user to upload a new file
-	"""
+# def display_toast_on_reset():
+# 	"""
+# 	Displays a toast notification when the user clicks the "Start Over" button to reset the app
 
-	st.toast("Application reset. Please upload a new file to start over.", icon="🔄", duration=5)
+# 	Parameters:
+# 	No parameters
+
+# 	Returns:
+# 	No return value, but shows a toast message indicating that the app has been reset and prompts the user to upload a new file
+# 	"""
+
+# 	st.toast("Application reset. Please upload a new file to start over.", icon="🔄", duration=5)
 
 
 def main() :
@@ -398,6 +416,7 @@ def main() :
 	os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
 
 	df = display_prompt_input()
+	df = st.session_state.get("clean_df")
 
 	if df is not None:
 		# Proceed only if we're dealing with a valid Pandas data frame
