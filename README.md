@@ -185,9 +185,9 @@ Seed: Random_State = 42
 * Data Cleaning: Handling missing values, removing inconsistencies, and ensuring data readiness
 
   Method:
-  * .info() was used to check for column types and missing values
-  * .unique() was used to check for unique values in categorical columns
-  * .describe() was used to generate summary statistics
+  * `.info()` was used to check for column types and missing values
+  * `.unique()` was used to check for unique values in categorical columns
+  * `.describe()` was used to generate summary statistics
 
 * Pre-analysis, finding correlation: Understanding patterns, correlations, and data distribution
 * Regression analysis and validation: Applying linear regression models to determine key loyalty drivers. and create training and test sets, assessing model accuracy
