@@ -266,8 +266,8 @@ This visualization shows customer segmentation using K-Means clustering based on
 From a business perspective, this suggests that **income alone is not a reliable predictor of customer spending behavior**. Companies should incorporate additional behavioral data such as purchase history, engagement metrics, or transaction frequency to build more accurate customer value models.
 
 ## Team Reflection Videos
-Itzel Polin: https://drive.google.com/file/d/1viqfMFB7xqJwj-FW7u5mA8ZwGQqyoDux/view?usp=sharing
-Jay Ramani:
-Ganga Ratnam:
-Saqib Syed: https://drive.google.com/file/d/1qywp3ngcWI1XYj7U0xTNlNCjgqcJZPfN/view?usp=drive_link
-Stanley Wong:
+* Itzel Polin: https://drive.google.com/file/d/1viqfMFB7xqJwj-FW7u5mA8ZwGQqyoDux/view?usp=sharing
+* Jay Ramani:
+* Ganga Ratnam:
+* Saqib Syed: https://drive.google.com/file/d/1qywp3ngcWI1XYj7U0xTNlNCjgqcJZPfN/view?usp=drive_link
+* Stanley Wong:
