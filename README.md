@@ -177,6 +177,7 @@ Seed: Random_State = 42
 4. Run the EDA notebook cells (experiments\notebooks\01_eda.ipynb) to perform the exploratory data analysis
 5. If the EDA results in findings that show there is a correlation between features and the target, then run the regression notebook (experiments\notebooks\02_regression.ipynb)
 6. If the EDA results in findings that there is no correlation or relationship between features and the target, then move ahead to run the clustering notebook (experiments\notebooks\03_clustering.ipynb) - choose the k values based on the maximum silhouette score, to observe the clusters; use the clusters to define customer groupings and segmentation, and personas that can be used to understand where to direct marketing campaigns
+7. A Streamlit web based front-end application for the modelling can also be used to see the modelling, as instructed in [README.md file under the src directory](src/README.md)
 
 
 ## Techniques & Technologies
@@ -256,7 +257,7 @@ The approach of analysis:
 
 ![Customer Segments](reports/customer_clusters.png)
 
-This visualization shows customer segmentation using K-Means clustering based on **annual income and spending score**. The clusters illustrate that customers with similar income levels can exhibit very different spending behaviors. High-income customers appear in both high- and low-spending segments, while moderate-income customers also show wide variation in spending patterns. From this, we can generate 4 basic personas for customers as a starting point:  
+This visualization shows customer segmentation using K-Means clustering based on **annual income and spending score**. The clusters illustrate that customers with similar income levels can exhibit very different spending behaviors. High-income customers appear in both high- and low-spending segments, while moderate-income customers also show wide variation in spending patterns. From this, we can generate 4 basic personas for customers as a starting point:
 * High income, high spend: the “target” customer that we want to market to and continue to drive engagement and spend
 * High income, low spend: the “untapped” customer that we can perform further analysis on and do more personalized marketing and loyalty campaigns
 * Low income, high spend: the “impulsive” customer that will spend anyway, and may not need to be explicitly targeted
@@ -265,8 +266,8 @@ This visualization shows customer segmentation using K-Means clustering based on
 From a business perspective, this suggests that **income alone is not a reliable predictor of customer spending behavior**. Companies should incorporate additional behavioral data such as purchase history, engagement metrics, or transaction frequency to build more accurate customer value models.
 
 ## Team Reflection Videos
-Itzel Polin: https://drive.google.com/file/d/1viqfMFB7xqJwj-FW7u5mA8ZwGQqyoDux/view?usp=sharing 
-Jay Ramani:  
-Ganga Ratnam:  
-Saqib Syed: https://drive.google.com/file/d/1qywp3ngcWI1XYj7U0xTNlNCjgqcJZPfN/view?usp=drive_link  
-Stanley Wong:  
+Itzel Polin: https://drive.google.com/file/d/1viqfMFB7xqJwj-FW7u5mA8ZwGQqyoDux/view?usp=sharing
+Jay Ramani:
+Ganga Ratnam:
+Saqib Syed: https://drive.google.com/file/d/1qywp3ngcWI1XYj7U0xTNlNCjgqcJZPfN/view?usp=drive_link
+Stanley Wong:
