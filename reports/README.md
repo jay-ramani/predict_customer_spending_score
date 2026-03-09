@@ -1,0 +1,1 @@
+This directory will have plots dynamically generated on executing the model

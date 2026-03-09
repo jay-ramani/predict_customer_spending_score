@@ -17,10 +17,10 @@ The latter is where the notebooks take the file as input.
 
 It has to be executed on a terminal locally under the root of the project directory with the command
 
-streamlit run src\streamlit_pcss_app.py
+`streamlit run src\streamlit_pcss_app.py`
 
 on a Windows native console,  or with
 
-streamlit run ./src/streamlit_pcss_app.py
+`streamlit run ./src/streamlit_pcss_app.py`
 
 on a Git BASH terminal
