@@ -26,15 +26,15 @@ def display_prompt_input():
 	Returns:
 	Pandas data frame containing the cleaned and preprocessed customer data, or None if no valid file was uploaded
 	"""
-	
+
 	if "clean_df" in st.session_state:
 		return st.session_state["clean_df"]
-	
+
 	df = None
 
 	# Start with a blank slate
 	placeholder = st.empty()
-	
+
 
 	with st.empty():
 		# Input title
@@ -308,7 +308,7 @@ def display_prediction():
 
 	df = st.session_state["clean_df"]
 
-	MODELS_DIR = Path("../../models")
+	MODELS_DIR = Path("../models")
 
 	if not MODELS_DIR.exists():
 		st.error("models folder not found.")
