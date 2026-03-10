@@ -8,7 +8,7 @@ Project repository located at https://github.com/jay-ramani/predict_customer_spe
 * [Stanley Wong](https://github.com/stan-2828)
 * [Saqib Syed](https://github.com/saqsyed)
 * [Jay Ramani](https://github.com/jay-ramani)
-* [Ganga Ratnam](https://github.com/ganga-ai)
+* [Ganga Kanagaratnam](https://github.com/ganga-ai)
 
 ## Industry Value
 Retail is a high-volume, competitive industry where margins are often thin and marketing dollars must be allocated carefully. Customer populations are diverse across age, income, household structure, and professional backgrounds, which creates real variability in spending habits. A recurring business challenge is deciding which customers to prioritize for targeted campaigns, loyalty benefits, and promotional incentives, especially when a store does not yet have rich purchase history for every customer.
@@ -273,6 +273,6 @@ From a business perspective, this suggests that **income alone is not a reliable
 ## Team Reflection Videos
 * Itzel Polin: https://drive.google.com/file/d/1viqfMFB7xqJwj-FW7u5mA8ZwGQqyoDux/view?usp=sharing
 * Jay Ramani:
-* Ganga Ratnam:
+* Ganga Kanagaratnam: https://drive.google.com/file/d/1j5q9JlbkFeA9btTR1PwP6ioMJAdC3anM/view?usp=drive_link
 * Saqib Syed: https://drive.google.com/file/d/1qywp3ngcWI1XYj7U0xTNlNCjgqcJZPfN/view?usp=drive_link
 * Stanley Wong:
