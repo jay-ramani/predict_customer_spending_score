@@ -255,7 +255,7 @@ The approach of analysis:
 
 With the Streamlit front-end, there is a minor tab jump on the first interaction in the Prediction tab. We identified the root cause: st.tabs() is a layout container rather than true stateful navigation. When a widget inside a tab changes, such as the model selectbox in Prediction, Streamlit re-runs the full script, rebuilds the page layout, and returns to the first tab by default. The active tab itself is not preserved in session state.
 
-Given the time constraints, we prioritized getting the core functionality working correctly, and left this behavior as is for now to be addressed in a future release. This is tracked by issue #69.
+Given the time constraints, we prioritized getting the core functionality working correctly, and left this behavior as is for now to be addressed in a future release. This is tracked by issue [#69](https://github.com/jay-ramani/predict_customer_spending_score/issues/69).
 
 ## Visuals & Credits
 ### Customer Segmentation (Income vs Spending)
@@ -272,7 +272,7 @@ From a business perspective, this suggests that **income alone is not a reliable
 
 ## Team Reflection Videos
 * Itzel Polin: https://drive.google.com/file/d/1viqfMFB7xqJwj-FW7u5mA8ZwGQqyoDux/view?usp=sharing
-* Jay Ramani:
+* Jay Ramani: https://drive.google.com/file/d/1V0li2-gKRIXLfT87kvDmFKGx0D8xEWD3/view?usp=sharing
 * Ganga Kanagaratnam: https://drive.google.com/file/d/1j5q9JlbkFeA9btTR1PwP6ioMJAdC3anM/view?usp=drive_link
 * Saqib Syed: https://drive.google.com/file/d/1qywp3ngcWI1XYj7U0xTNlNCjgqcJZPfN/view?usp=drive_link
 * Stanley Wong:
