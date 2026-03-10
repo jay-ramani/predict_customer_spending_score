@@ -251,6 +251,11 @@ The approach of analysis:
   * SKLearn: regression analysis
   * Tensorflow: neural networks
 
+## Known Issues
+
+With the Streamlit front-end, there is a minor tab jump on the first interaction in the Prediction tab. We identified the root cause: st.tabs() is a layout container rather than true stateful navigation. When a widget inside a tab changes, such as the model selectbox in Prediction, Streamlit re-runs the full script, rebuilds the page layout, and returns to the first tab by default. The active tab itself is not preserved in session state.
+
+Given the time constraints, we prioritized getting the core functionality working correctly, and left this behavior as is for now to be addressed in a future release. This is tracked by issue #69.
 
 ## Visuals & Credits
 ### Customer Segmentation (Income vs Spending)
